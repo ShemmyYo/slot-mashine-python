@@ -14,6 +14,13 @@ symbol_count = {
     "♣": 8
 }
 
+symbol_value = {
+    "♥": 5,
+    "♦": 4,
+    "♠": 3,
+    "♣": 2
+}
+
 
 def spin_mashine(rows, cols, symbols):
     """
@@ -52,6 +59,25 @@ def print_slot_mashine(columns):
                 print(column[row], end="")
 
         print(f"\n-+-+-")
+
+
+def win_check(columns, lines, bet, values):
+    winnings = 0
+    winning_lines = []
+    for line in range(lines):
+        symbol = columns[0][line]
+        for column in columns:
+            symbol_in_reel = column[line]
+            if symbol != symbol_in_reel:
+                break
+        else:
+            winnings += values[symbol] * bet
+            winning_lines.append(line +1)
+            print()
+            print("Congratulations You won!")
+            print(f"You have won €{winnings}! on line: ", *winning_lines)
+
+    return winnings, winning_lines
 
 
 def deposit():
@@ -104,7 +130,7 @@ def get_bet():
     and checking if input is a valid number
     """
     while True:
-        bet = input(f"How much would you like to bet on each line? €")
+        bet = input("How much would you like to bet on each line? €")
         if bet.isdigit():
             bet = int(bet)
             if MIN_BET <= bet <= MAX_BET:
@@ -120,12 +146,11 @@ def get_bet():
     return bet
 
 
-def main():
+def spin(balance):
     """
-    main calling all required functions
-    while loop within main that checks whether user balance can cover bet
+    Cretaed spin function with while loop within it
+    that checks whether user balance can cover bet
     """
-    balance = deposit()  
     lines = get_number_of_lines()
     
     while True:
@@ -142,6 +167,25 @@ def main():
 
     reels = spin_mashine(ROWS, COLS, symbol_count)
     print_slot_mashine(reels)
+    winnings, winning_lines = win_check(reels, lines, bet, symbol_value)
+    return winnings - total_bet
+
+
+def main():
+    """
+    main calling all required functions
+    """
+    balance = deposit()  
+    while True:
+        print(f"Current balance is €{balance}\n")
+        answer = input("Press Enter to spin (Q to Quit)")
+        if answer == "q":
+            break
+        balance += spin(balance)
+
+    print(f"Your balance is {balance}"\n)
+    print("Good-bye!")
+
 
 
 main()
