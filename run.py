@@ -16,6 +16,9 @@ symbol_count = {
 
 
 def spin_mashine(rows, cols, symbols):
+    """
+    functions returning random columns-symbols for reels
+    """
     all_symbols = []
     for symbol, symbol_count in symbols.items():
         for _ in range(symbol_count):
@@ -36,6 +39,9 @@ def spin_mashine(rows, cols, symbols):
 
 
 def print_slot_mashine(columns):
+    """
+    function printing slot mashine by transposing column to line
+    """
     print(f"\n-+-+-")
     for row in range(len(columns[0])):
         
@@ -49,6 +55,10 @@ def print_slot_mashine(columns):
 
 
 def deposit():
+    """
+    function collecting user imput as deposit and checking 
+    if input is a valid number
+    """
     while True:
         amount = input(f"What's your deposit? €")
         if amount.isdigit():
@@ -67,6 +77,10 @@ def deposit():
 
 
 def get_number_of_lines(): 
+    """
+    function collecting user imput as number of lines to bet and 
+    checking if input is a valid number
+    """
     while True:
         lines = input("Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
         if lines.isdigit():
@@ -85,6 +99,10 @@ def get_number_of_lines():
 
 
 def get_bet():
+    """
+    function collecting user imput as the amount thats being bet by user
+    and checking if input is a valid number
+    """
     while True:
         bet = input(f"How much would you like to bet on each line? €")
         if bet.isdigit():
@@ -101,11 +119,15 @@ def get_bet():
     print(f"Your bet amount is: €{bet}\n")
     return bet
 
+
 def main():
+    """
+    main calling all required functions
+    while loop within main that checks whether user balance can cover bet
+    """
     balance = deposit()  
     lines = get_number_of_lines()
     
-
     while True:
         bet = get_bet()
         total_bet = bet * lines
