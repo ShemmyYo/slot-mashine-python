@@ -108,13 +108,15 @@ def get_number_of_lines():
     checking if input is a valid number
     """
     while True:
-        lines = input("Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
+        lines = input("Enter the number of lines to bet on (1-" + str(MAX_LINES) + ") (or press Q to Quit) ")
         if lines.isdigit():
             lines = int(lines)
             if 1 <= lines <= MAX_LINES:
                 break
             else:
                 print(f"Enter a valid number of lines (between 1-{MAX_LINES})\n")
+        elif lines == "q":
+            break
         else:
             print(f"NOTE: '{lines}', you entered is not accepted!\n")
             print("Please enter a valid number of lines")
@@ -130,13 +132,15 @@ def get_bet():
     and checking if input is a valid number
     """
     while True:
-        bet = input("How much would you like to bet on each line? €")
+        bet = input("How much would you like to bet on each line? (or press Q to Quit) €")
         if bet.isdigit():
             bet = int(bet)
             if MIN_BET <= bet <= MAX_BET:
                 break
             else:
                 print(f"Bet amount must be between then €{MIN_BET} and €{MAX_BET}\n")
+        elif bet == "q":
+            break
         else:
             print(f"NOTE: '{bet}', you entered is not correct!\n")
             print("Please enter a valid bet amount again")
@@ -183,7 +187,7 @@ def main():
             break
         balance += spin(balance)
 
-    print(f"Your balance is {balance}"\n)
+    print(f"Your balance is {balance}\n")
     print("Good-bye!")
 
 
