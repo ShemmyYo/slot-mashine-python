@@ -1,4 +1,6 @@
 MAX_LINES = 3
+MAX_BET = 100
+MIN_BET = 1
 
 def deposit():
     while True:
@@ -8,11 +10,11 @@ def deposit():
             if amount > 0:
                 break
             else:
-                print("Amount must be grater than 0")
+                print("Amount must be grater then 0")
         else:
-            print(f"'{amount}', you entered is invalid\n")
+            print(f"NOTE: '{amount}', you entered is not accepted!\n")
             print("Please enter a valid amount again")
-            print("Amount must be a number, and grater than 0")
+            print("Amount must be a number, and grater the1000n 0")
 
     print("Thank  You!")
     print(f"Your deposit is: €{amount}")
@@ -29,7 +31,7 @@ def get_number_of_lines():
             else:
                 print(f"Enter a valid number of lines (between 1-{MAX_LINES})\n")
         else:
-            print(f"'{lines}', you entered is invalid\n")
+            print(f"NOTE: '{lines}', you entered is not accepted!\n")
             print("Please enter a valid number of lines")
             print(f"Number of lines must be a number between 1 and {MAX_LINES}\n")
 
@@ -38,9 +40,31 @@ def get_number_of_lines():
     return lines
 
 
+def get_bet():
+    while True:
+        bet = input(f"How much would you like to bet on each line? €\n")
+        if bet.isdigit():
+            bet = int(bet)
+            if MIN_BET <= bet <= MAX_BET:
+                break
+            else:
+                print(f"Bet amount must be between then €{MIN_BET} and €{MAX_BET}\n")
+        else:
+            print(f"NOTE: '{bet}', you entered is not correct!\n")
+            print("Please enter a valid bet amount again")
+            print(f"Bet amount must be a number grater then €{MIN_BET} and €{MAX_BET}\n")
+
+    print("Thank  You!")
+    print(f"Your deposit is: €{bet}\n")
+    return bet
+
 def main():
     balance = deposit()  
     lines = get_number_of_lines()
+    bet = get_bet()
+    total_bet = bet * lines
+    print(f"You are betting €{bet} on {lines} lines")
+    print(f"Total bet is {total_bet}")
 
 
 main()
