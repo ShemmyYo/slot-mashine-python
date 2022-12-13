@@ -4,7 +4,7 @@ MIN_BET = 1
 
 def deposit():
     while True:
-        amount = input(f"What's your deposit? €\n")
+        amount = input(f"What's your deposit? €")
         if amount.isdigit():
             amount = int(amount)
             if amount > 0:
@@ -16,14 +16,13 @@ def deposit():
             print("Please enter a valid amount again")
             print("Amount must be a number, and grater the1000n 0")
 
-    print("Thank  You!")
-    print(f"Your deposit is: €{amount}")
+    print(f"Your deposit is: €{amount}\n")
     return amount
 
 
 def get_number_of_lines(): 
     while True:
-        lines = input("Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")?\n")
+        lines = input("Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
         if lines.isdigit():
             lines = int(lines)
             if 1 <= lines <= MAX_LINES:
@@ -35,14 +34,13 @@ def get_number_of_lines():
             print("Please enter a valid number of lines")
             print(f"Number of lines must be a number between 1 and {MAX_LINES}\n")
 
-    print("Thank  You!")
-    print(f"You bet {lines} lines\n")
+    print(f"You bet on {lines} lines\n")
     return lines
 
 
 def get_bet():
     while True:
-        bet = input(f"How much would you like to bet on each line? €\n")
+        bet = input(f"How much would you like to bet on each line? €")
         if bet.isdigit():
             bet = int(bet)
             if MIN_BET <= bet <= MAX_BET:
@@ -54,17 +52,25 @@ def get_bet():
             print("Please enter a valid bet amount again")
             print(f"Bet amount must be a number grater then €{MIN_BET} and €{MAX_BET}\n")
 
-    print("Thank  You!")
-    print(f"Your deposit is: €{bet}\n")
+    print(f"Your bet amount is: €{bet}\n")
     return bet
 
 def main():
     balance = deposit()  
     lines = get_number_of_lines()
-    bet = get_bet()
-    total_bet = bet * lines
+    
+
+    while True:
+        bet = get_bet()
+        total_bet = bet * lines
+
+        if total_bet >= balance:
+            print(f"Insufficient balance! Your current balance is €{balance}!\n")
+        else:
+            break
+
     print(f"You are betting €{bet} on {lines} lines")
-    print(f"Total bet is {total_bet}")
+    print(f"Total bet is €{total_bet}")
 
 
 main()
