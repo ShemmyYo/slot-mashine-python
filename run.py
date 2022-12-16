@@ -10,10 +10,10 @@ ROWS = 3
 COLS = 3
 
 symbol_count = {
-    "♥": 2,
+    "♥": 3,
     "♦": 4,
     "♠": 6,
-    "♣": 8
+    "♣": 7
 }
 
 symbol_value = {
@@ -199,7 +199,7 @@ def run_menu():
     """
     while True:
         run_menu_info()
-        print("\n\033[1;33;40m  Choose option from the list below:\n")
+        print("\033[1;33;40m  Choose option from the list below:\n")
 
         print("\033[1;35;40m  >>>   Press 1 to >>> Play  Game <<<")
         print("\033[1;35;40m  >>>   Press 2 to >>> View Rules <<<")
@@ -258,13 +258,21 @@ def intructions():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>              <<<<<<<<<<<<<<<<<<<<<<<<<<<")
     print("\033[1;31;40m                      >>> Instructions <<<                        ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>              <<<<<<<<<<<<<<<<<<<<<<<<<<<")
+    print("\033[1;33;40m------------------------------------------------------------------")
     print("\033[1;35;10m  The aim of the game is to make sure that all of the symbols     ")
-    print("\033[1;35;10m  on the screen of the machine match up - get them all,           ")
-    print("\033[1;35;10m  and you'll win the money.                                       ")
-    print("\033[1;35;10m  All you need is a bag of change and you're ready to go!\n       ")
-    print("instructions TBC \n")
+    print("\033[1;35;10m  on the screen of the machine match up in line                   ")
+    print("\033[1;35;10m  Get them all, and you'll win the the money!                     ")
+    print("\033[1;33;40m==================================================================")
+    print("\033[1;35;10m  1. Only horizontal lines can be bet on                          ")
+    print("\033[1;35;10m  2. When betting on lines you start betting on top line first,   ")
+    print("\033[1;35;10m     middle second and bottom third.                              ")
+    print("\033[1;35;10m  3. There is: 3 x ♥, 4 x ♦, 6 x ♠ and 7 x ♣                      ")
+    print("\033[1;35;10m  4. Valued :  ♥ - 5, ♦ - 4, ♠ - 3 and ♣ - 2                      ")
+    print("\033[1;33;40m==================================================================")
+    print("\033[1;35;10m  ! All you need is a bag of change and you're ready to go!       ")
+    print("\033[1;33;40m------------------------------------------------------------------")
 
-    answer = input("\033[1;33;40m  Press Enter to go to >>> MAIN MENU <<< (Q to Quit)\n")
+    answer = input("\033[1;33;40m  >>>  Press Enter to go to >>> MAIN MENU <<< (Q to Quit)  <<<    \n")
     if answer == "q":
         quit()
     clear_screen()
@@ -335,8 +343,8 @@ def main():
                 game_over_info()
             else:
                 print("\033[1;34;40m                       >>>  Let's play! <<<                        ")
-                answer = input("\033[1;31;40m>>>>>>>>>>>  Press >>> Enter to Spin <<< (B to Break)  <<<<<<<<<<<")
-                print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+                print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<\n")
+                answer = input("\033[1;31;40m>>>>>>>>>>>  Press >>> Enter to Spin <<< (B to Break)  <<<<<<<<<<<\n")
                 if answer == "b":
                     break
                 balance += spin(balance)
