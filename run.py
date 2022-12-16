@@ -119,10 +119,21 @@ def get_bet():
 
 def spin(balance):
     """
-    Cretaed spin function with while loop within it
-    that checks whether user balance can cover bet
+    Cretaed spin function with while loop within it that:
+    checks whether user balance can cover bet,
+    checks whether user balance can cover amount of lines
     """
     lines = get_number_of_lines()
+
+    while True:
+        if lines > balance:
+            print(f"\033[1;31;40m  >>>  Insufficient balance to cover all lines! Your current balance is €{balance}!\n")
+            time.sleep(1)
+            game_over_info()
+            time.sleep(1)
+            main()
+        else:
+            break
 
     while True:
         bet = get_bet()
