@@ -124,14 +124,13 @@ def spin(balance):
     checks whether user balance can cover amount of lines
     """
     lines = get_number_of_lines()
-
+    
     while True:
         if lines > balance:
-            print(f"\033[1;31;40m  >>>  Insufficient balance to cover all lines! Your current balance is €{balance}!\n")
+            print("\033[1;31;40m  >>>  Insufficient balance to cover all lines!")
+            print(f"\033[1;31;40m  >>>  Your current balance is €{balance}!\n")
             time.sleep(1)
             game_over_info()
-            time.sleep(1)
-            main()
         else:
             break
 
@@ -221,8 +220,6 @@ def run_menu():
             clear_screen()
             welcome_screen()
             time.sleep(0.5)
-            game_over_info()
-            time.sleep(0.5)
             quit()
         else:
             print(f"\033[1;31;40m  '{value}' is not valid!")
@@ -309,6 +306,10 @@ def game_over_info():
     print("\033[1;31;40m                        >>> GAME OVER <<<                         ")
     print("\033[1;33;40m                        >>> Good-Bye! <<<                         ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+    input("\n\033[1;33;40m  >>>  Press Enter to exit game\n")
+    clear_screen()
+    welcome_screen()
+    main()
 
 
 def clear_screen():
@@ -326,20 +327,22 @@ def main():
     welcome_screen()
     run_menu()
     balance = deposit()  
-    if (balance >= 0):
+    if (balance > 0):
         while True:
             print("\n\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
             print(f"\033[1;32;40m                 >>>  Current balance is €{balance}! <<<            ")
-            print("\033[1;34;40m                       >>>  Lets play! <<<                        ")
-            print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<\n")
-            answer = input("\033[1;31;40m>>>>>>>>>>>  Press >>> Enter to Spin <<< (Q to Quit)  <<<<<<<<<<<<\n")
-            if answer == "q":
-                break
-            balance += spin(balance)
+            if balance <= 0:
+                game_over_info()
+            else:
+                print("\033[1;34;40m                       >>>  Let's play! <<<                        ")
+                answer = input("\033[1;31;40m>>>>>>>>>>>  Press >>> Enter to Spin <<< (B to Break)  <<<<<<<<<<<")
+                print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+                if answer == "b":
+                    break
+                balance += spin(balance)
     else:
         print(f"  Your ballance is €{balance}!")
     
-
     time.sleep(0.5)
     clear_screen()
     welcome_screen()
