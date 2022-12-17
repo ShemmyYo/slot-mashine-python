@@ -119,29 +119,30 @@ def get_bet():
 
 def spin(balance):
     """
-    Cretaed spin function with while loop within to:
+    Cretaed spin function with 2 while loops within to:
     checks whether user balance can cover bet,
     checks whether user balance can cover amount of lines
-    """
+    """    
     while True:
-        lines = get_number_of_lines() 
+        lines = get_number_of_lines()         
         if balance <= 3 and balance < lines:
-            print(f"\033[1;31;40m  >>>  Insufficient balance to cover {lines} lines!\n")
-            time.sleep(1)
-            spin(balance)
+            print(f"\033[1;31;40m  >>>  Insufficient balance to cover {lines} line(s)!\n")
+            time.sleep(1.5)
+        else:
+            break
 
+    while True:
         bet = get_bet()
         total_bet = bet * lines
         if total_bet > balance:
-            print(f"\033[1;31;40m  >>>  Your balance won't cover {lines} lines you wish to bet on €{bet} each!\n")
+            print(f"\033[1;31;40m  >>>  Balance won't cover {lines} line(s) you wish to bet on €{bet} each!\n")
             print(f"\033[1;31;40m  >>>  Your current balance is €{balance}!")
-            time.sleep(1)
-            spin(balance)
-
-        break 
+            time.sleep(1.5)
+        else:
+            break 
 
     spin_info()
-    print(f"\033[1;33;40m                >>> You are betting €{bet} on {lines} lines <<<")
+    print(f"\033[1;33;40m                >>> You are betting €{bet} on {lines} line(s) <<<")
     print(f"\033[1;33;40m                     >>> Total bet is €{total_bet} <<<")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     reels = spin_mashine(ROWS, COLS, symbol_count)
@@ -154,16 +155,15 @@ def print_slot_mashine(columns):
     """
     Prints slot mashine by transposing column to line
     """
-    print(f"\n\033[1;33;40m>   <+---------+>      <+---------+>      <+---------+>   <")
+    print(f"\n\033[1;33;40m   --<+>>>>X<<<<+>--    --<+>>>>X<<<<+>--    --<+>>>>X<<<<+>--    ")
     for row in range(len(columns[0])):
-        
         for i, column in enumerate(columns):
             if i != len(columns) -1:
-                print("\033[1;33;40m     |  ", "\033[1;31;40m", column[row], end="\033[1;33;40m    |   ")
+                print("\033[1;33;40m      |  ", "\033[1;31;40m", column[row], end="\033[1;33;40m    |    ")
             else:
-                print("\033[1;33;40m     |  ", "\033[1;31;40m", column[row], end="\033[1;33;40m    |   ")
+                print("\033[1;33;40m      |  ", "\033[1;31;40m", column[row], end="\033[1;33;40m    |       ")
 
-        print(f"\n>   <+---------+>      <+---------+>      <+---------+>   <")
+        print(f"\n\033[1;33;40m   --<+>>>>X<<<<+>--    --<+>>>>X<<<<+>--    --<+>>>>X<<<<+>--    ")
 
 
 def win_check(columns, lines, bet, values):
@@ -257,7 +257,7 @@ def welcome_screen():
 def intructions():
     welcome_screen()
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>              <<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    print("\033[1;31;40m                      >>> Instructions <<<                        ")
+    print("\033[1;35;10m                      >>> Instructions <<<                        ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>              <<<<<<<<<<<<<<<<<<<<<<<<<<<")
     print("\033[1;33;40m------------------------------------------------------------------")
     print("\033[1;35;10m  The aim of the game is to make sure that all of the symbols     ")
@@ -280,31 +280,31 @@ def intructions():
 
 def run_menu_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    print("\033[1;31;40m                        >>> MAIN MENU <<<                         ")
+    print("\033[1;35;10m                        >>> MAIN MENU <<<                         ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<\n")
 
 
 def deposit_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    print("\033[1;31;40m                        >>>  Deposit  <<<                         ")
+    print("\033[1;35;10m                        >>>  Deposit  <<<                         ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<\n")
 
 
 def get_number_of_lines_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>               <<<<<<<<<<<<<<<<<<<<<<<<<<")
-    print("\033[1;31;40m                      >>>  No of Lines  <<<                       ")
+    print("\033[1;35;10m                      >>>  No of Lines  <<<                       ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>               <<<<<<<<<<<<<<<<<<<<<<<<<<\n")
 
 
 def get_bet_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<<<<<<<<<<<<<")
-    print("\033[1;31;40m                      >>>  Bet per Line  <<<                      ")
+    print("\033[1;35;10m                      >>>  Bet per Line  <<<                      ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<<<<<<<<<<<<<\n")
 
 
 def spin_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<<<<<<<<<<<<<")
-    print("\033[1;31;40m                      >>>  Turn Results  <<<                      ")
+    print("\033[1;35;10m                      >>>  Turn Results  <<<                      ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<<<<<<<<<<<<<")
 
 
@@ -336,20 +336,24 @@ def main():
     balance = deposit()  
     if (balance > 0):
         while True:
+            clear_screen()
+            welcome_screen()
             print("\n\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
             print(f"\033[1;32;40m                 >>>  Current balance is €{balance}! <<<                ")
             if balance <= 0:
                 game_over_info()
+                input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
             else:
                 print("\033[1;34;40m                       >>>  Let's play! <<<                       ")
-                print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<\n")
-                answer = input("\033[1;31;40m>>>>>>>>>>>  Press >>> Enter to Spin <<< (B to Break)  <<<<<<<<<<<\n")
+                print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+                answer = input("\033[1;31;40m>>>>>>>>>>>>>>  Press >>> Enter to Spin <<< (B to Break)  <<<<<<<<")
                 if answer == "b":
                     break
                 balance += spin(balance)
+                input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
     else:
         print(f"  Your ballance is €{balance}!")
-        time.sleep(1)
+        input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
     
     time.sleep(0.5)
     clear_screen()
