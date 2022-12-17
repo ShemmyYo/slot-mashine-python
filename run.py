@@ -119,30 +119,26 @@ def get_bet():
 
 def spin(balance):
     """
-    Cretaed spin function with while loop within it that:
+    Cretaed spin function with while loop within to:
     checks whether user balance can cover bet,
     checks whether user balance can cover amount of lines
     """
-    lines = get_number_of_lines()
-    
     while True:
-        if lines > balance:
-            print("\033[1;31;40m  >>>  Insufficient balance to cover all lines!")
-            print(f"\033[1;31;40m  >>>  Your current balance is €{balance}!\n")
+        lines = get_number_of_lines() 
+        if balance <= 3 and balance < lines:
+            print(f"\033[1;31;40m  >>>  Insufficient balance to cover {lines} lines!\n")
             time.sleep(1)
-            game_over_info()
-        else:
-            break
+            spin(balance)
 
-    while True:
         bet = get_bet()
         total_bet = bet * lines
-
         if total_bet > balance:
-            print(f"\033[1;31;40m  >>>  Insufficient balance! Your current balance is €{balance}!\n")
+            print(f"\033[1;31;40m  >>>  Your balance won't cover {lines} lines you wish to bet on €{bet} each!\n")
+            print(f"\033[1;31;40m  >>>  Your current balance is €{balance}!")
             time.sleep(1)
-        else:
-            break   
+            spin(balance)
+
+        break 
 
     spin_info()
     print(f"\033[1;33;40m                >>> You are betting €{bet} on {lines} lines <<<")
@@ -176,19 +172,24 @@ def win_check(columns, lines, bet, values):
     """
     winnings = 0
     winning_lines = []
+    loosing_lines = []
     for line in range(lines):
         symbol = columns[0][line]
         for column in columns:
             symbol_in_reel = column[line]
             if symbol != symbol_in_reel:
+                loosing_lines.append(line +1)
                 break
         else:
             winnings += values[symbol] * bet
             winning_lines.append(line +1)
             print()
-            print("\n\033[1;33;40m               Congratulations! You won!!!")
+            print("\n\033[1;33;40m               Congratulations! You won!!!                        ")
             print("\033[1;33;40m******************************************************************")
-            print(f"\033[1;32;40m  You have won €{winnings}! on line: ", *winning_lines)
+            print(f"\033[1;32;40m  >>>  You have won €{winnings}! on line(s): ", *winning_lines)
+
+    print("\n\033[1;31;40mxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")      
+    print("\033[1;31;40m  >>>  You have lost on line(s): ", *loosing_lines)
 
     return winnings, winning_lines
 
@@ -235,7 +236,7 @@ def welcome_screen():
     print("\033[1;33;40m******************************************************************")
     print("\033[1;34;10m                 Welcome to One-Armed Bandit!                     ")
     print("                                                                  ")
-    print("\033[1;33;40m******************************************************************")
+    print("\033[1;34;10m******************************************************************")
     print("\033[1;34;10m    ####  ##   ## #####      ####  #####  ##   ## ##### #####     ")
     print("\033[1;35;10m   ##  ## ###  ## ##        ##  ## ##  ## ### ### ##    ##  ##    ")
     print("\033[1;36;10m   ##  ## ## #### ####  ##  ###### #####  ## # ## ####  ##  ##    ")
@@ -248,7 +249,7 @@ def welcome_screen():
     print("\033[1;35;10m        ##  ##  ##  ##  ##  ###  ##  ##  ##    ##                 ")
     print("\033[1;34;10m        ####    ##  ##  ##   ##  #####   ##    ##     ##          ")
     print("                                                                  ")
-    print("\033[1;33;40m******************************************************************")
+    print("\033[1;34;10m******************************************************************")
     print("\033[1;31;40m                          by ShemmyYo                             ")
     print("\033[1;33;40m******************************************************************")
 
@@ -275,8 +276,6 @@ def intructions():
     answer = input("\033[1;33;40m  >>>  Press Enter to go to >>> MAIN MENU <<< (Q to Quit)  <<<    \n")
     if answer == "q":
         quit()
-    clear_screen()
-    welcome_screen()
 
 
 def run_menu_info():
@@ -329,7 +328,7 @@ def clear_screen():
 
 def main():
     """
-    main calling all required functions
+    main calling all required functions to run the game
     """
     clear_screen()
     welcome_screen()
@@ -338,11 +337,11 @@ def main():
     if (balance > 0):
         while True:
             print("\n\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-            print(f"\033[1;32;40m                 >>>  Current balance is €{balance}! <<<            ")
+            print(f"\033[1;32;40m                 >>>  Current balance is €{balance}! <<<                ")
             if balance <= 0:
                 game_over_info()
             else:
-                print("\033[1;34;40m                       >>>  Let's play! <<<                        ")
+                print("\033[1;34;40m                       >>>  Let's play! <<<                       ")
                 print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<<<<<<<<<<<<<\n")
                 answer = input("\033[1;31;40m>>>>>>>>>>>  Press >>> Enter to Spin <<< (B to Break)  <<<<<<<<<<<\n")
                 if answer == "b":
@@ -350,6 +349,7 @@ def main():
                 balance += spin(balance)
     else:
         print(f"  Your ballance is €{balance}!")
+        time.sleep(1)
     
     time.sleep(0.5)
     clear_screen()
