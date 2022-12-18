@@ -154,9 +154,9 @@ you wish to bet on €{bet} each!\n")
 
     spin_info()
     print(f"\033[1;33;40m                >>> You are betting €{bet} on\
-{lines} line(s) <<<")
+{lines} line(s) <<<         ")
     print(f"\033[1;33;40m                     >>> Total bet is €{total_bet}\
-<<<")
+<<<         ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<\
 <<<<<<<<<<<<<<<")
     reels = spin_mashine(ROWS, COLS, symbol_count)
@@ -228,7 +228,7 @@ def run_menu():
         print("\033[1;35;40m  >>>   Press 2 to >>> View Rules <<<")
         print("")
         print("\033[1;35;40m  >>>   Press Q to >>> Quit  Game <<<\n")
-        value = input().upper()
+        value = input("\033[1;33;40mYour option: ").upper()
         if value == "1":
             time.sleep(0.5)
             clear_screen()
@@ -305,7 +305,7 @@ def intructions():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>              <<<<<<<<<<<<<<<\
 <<<<<<<<<<<<")
     print("\033[1;35;10m                      >>> Instructions <<<            \
- ")
+            ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>              <<<<<<<<<<<<<<<\
 <<<<<<<<<<<<")
     print("\033[1;33;40m------------------------------------------------------\
@@ -313,25 +313,25 @@ def intructions():
     print("\033[1;35;10m  The aim of the game is to make sure that all of the \
 symbols     ")
     print("\033[1;35;10m  on the screen of the machine match up in line       \
- ")
+            ")
     print("\033[1;35;10m  Get them all, and you'll win the the money!         \
- ")
+            ")
     print("\033[1;33;40m======================================================\
 ============")
     print("\033[1;35;10m  1. Only horizontal lines can be bet on              \
- ")
+            ")
     print("\033[1;35;10m  2. When betting on lines you start betting on top li\
 ne first,   ")
     print("\033[1;35;10m     middle second and bottom third.                  \
- ")
+            ")
     print("\033[1;35;10m  3. There is: 3 x ♥, 4 x ♦, 6 x ♠ and 7 x ♣          \
- ")
+            ")
     print("\033[1;35;10m  4. Valued :  ♥ - 5, ♦ - 4, ♠ - 3 and ♣ - 2          \
- ")
+            ")
     print("\033[1;33;40m======================================================\
 ============")
     print("\033[1;35;10m  ! All you need is a bag of change and you're ready t\
-ogo!       ")
+ogo!        ")
     print("\033[1;33;40m------------------------------------------------------\
 ------------")
 
@@ -345,16 +345,16 @@ def run_menu_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
 <<<<<<<<<<<<")
     print("\033[1;35;10m                        >>> MAIN MENU <<<             \
- ")
+            ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
-<<<<<<<<<<<\n")
+<<<<<<<<<<<<\n")
 
 
 def deposit_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
 <<<<<<<<<<<<")
     print("\033[1;35;10m                        >>>  Deposit  <<<             \
- ")
+            ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
 <<<<<<<<<<<<\n")
 
@@ -363,7 +363,7 @@ def get_number_of_lines_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>               <<<<<<<<<<<<<<\
 <<<<<<<<<<<<")
     print("\033[1;35;10m                      >>>  No of Lines  <<<           \
- ")
+            ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>               <<<<<<<<<<<<<<\
 <<<<<<<<<<<<\n")
 
@@ -372,7 +372,7 @@ def get_bet_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<\
 <<<<<<<<<<<<")
     print("\033[1;35;10m                      >>>  Bet per Line  <<<          \
- ")
+            ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<\
 <<<<<<<<<<<<\n")
 
@@ -381,7 +381,7 @@ def spin_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<\
 <<<<<<<<<<<<")
     print("\033[1;35;10m                      >>>  Turn Results  <<<          \
- ")
+            ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<\
 <<<<<<<<<<<<<")
 
@@ -390,11 +390,11 @@ def game_over_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
 <<<<<<<<<<<<<")
     print("\033[1;31;40m                        >>> GAME OVER <<<             \
- ")
+            ")
     print("\033[1;33;40m                        >>> Good-Bye! <<<             \
- ")
+            ")
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
-    <<<<<<<<<<<<<")
+<<<<<<<<<<<<<")
     input("\n\033[1;33;40m  >>>  Press Enter to exit game\n")
     clear_screen()
     welcome_screen()
@@ -413,6 +413,7 @@ def main():
     """
     clear_screen()
     welcome_screen()
+    time.sleep(2)
     run_menu()
     balance = deposit()
     if (balance > 0):
@@ -422,7 +423,7 @@ def main():
             print("\n\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<\
 <<<<<<<<<<<<<<<<<<<<<<")
             print(f"\033[1;32;40m                 >>>  Current balance is \
-€{balance}! <<<                ")
+€{balance}! <<<                 ")
             if balance <= 0:
                 game_over_info()
                 input("\n\033[1;33;40m  >>>  Press Enter to continue\n")

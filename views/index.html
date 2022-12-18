@@ -1,7 +1,24 @@
 <body>
-    <button onclick="window.location.reload()">Run Program</button>
-    <div id="terminal"></div>
-
+    <main>
+        <div class="aurora-outer">
+            <div class="aurora-inner">
+            <h1 class="title">One-Armed Bandit!</h1>
+                <div id="program-bttn">
+                    <button onclick="window.location.reload()">Run One-Armed Bandit!</button>
+                </div>
+                <div id="terminal-container">
+                    <div id="terminal"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div id="copyright-container">
+            <a href="https://github.com/ShemmyYo/" target="_blank" rel="noopener"
+                aria-label="Visit my GitHub page(opens in a new tab)">2022 ShemmyYo -
+                Project developed for Educational purposes</a>
+        </div>
+    </footer>
     <script>
         var term = new Terminal({
             cols: 80,
