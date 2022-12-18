@@ -5,75 +5,68 @@ import os
 MAX_LINES = 3
 MAX_BET = 100
 MIN_BET = 1
+DEPOSIT = 100
 
 ROWS = 3
 COLS = 3
 
 symbol_count = {
-    "♥": 3,
-    "♦": 4,
-    "♠": 6,
-    "♣": 7
+    "♡": 3,
+    "♢": 4,
+    "♤": 6,
+    "♧": 7
 }
 
 symbol_value = {
-    "♥": 5,
-    "♦": 4,
-    "♠": 3,
-    "♣": 2
+    "♡": 5,
+    "♢": 4,
+    "♤": 3,
+    "♧": 2
 }
 
 
-def spin_mashine(rows, cols, symbols):
+def clear_screen():
     """
-    Returning random columns-symbols for reels
+    Clears the terminal
     """
-    all_symbols = []
-    for symbol, symbol_count in symbols.items():
-        for _ in range(symbol_count):
-            all_symbols.append(symbol)
-
-    columns = []
-    for _ in range(cols):
-        column = []
-        current_symbols = all_symbols[:]
-        for _ in range(rows):
-            value = random.choice(current_symbols)
-            current_symbols.remove(value)
-            column.append(value)
-
-        columns.append(column)
-
-    return columns
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 def deposit():
     """
-    Collecting user imput as deposit and checking
-    if input is a valid number
+    Collects user imput as deposit and implements checks
+    if input is a valid number and prints msg.
     """
     deposit_info()
-    while True:
-        amount = input("\033[1;33;40m  What's your deposit? €")
-        if amount.isdigit():
-            amount = int(amount)
-            if amount > 0:
-                break
+    print("\033[1;33;40m  Your default deposit is €100")
+    answer = input("\033[1;33;40m  >>> Press 'C' and continue or 'D' to \
+change deposit amount ").upper()
+    if answer == "C":
+        amount = DEPOSIT
+    elif answer == "D":
+        while True:
+            amount = input("\033[1;33;40m  What's your deposit? €")
+            if amount.isdigit():
+                amount = int(amount)
+                if amount > 0:
+                    break
+                else:
+                    print("  !!!  NOTE: Amount must be grater then 0")
             else:
-                print("  !!!  NOTE: Amount must be grater then 0")
-        else:
-            print(f"\033[1;31;40m  !!!  NOTE: '{amount}', you entered is not \
-accepted!\n")
-            print("\033[1;35;40m  Please enter a valid amount again")
-            print("\033[1;35;40m  Amount must be a number, and grater then 0")
+                print(f"\033[1;31;40m  !!!  NOTE: '{amount}', you \
+entered is not accepted!\n")
+                print("\033[1;35;40m  Please enter a valid amount \
+again")
+                print("\033[1;35;40m  Amount must be a number, and \
+grater then 0")
 
     return amount
 
 
 def get_number_of_lines():
     """
-    Collecting user imput as number of lines to bet and
-    checking if input is a valid number
+    Collects user imput as number of lines to bet,
+    checks if input is a valid number and prints msg.
     """
     get_number_of_lines_info()
     while True:
@@ -99,8 +92,8 @@ not accepted!\n")
 
 def get_bet():
     """
-    Collecting user imput as the amount thats being bet by user
-    and checking if input is a valid number
+    Collects user imput as the amount thats being bet by user,
+    checks if input is a valid number and prints msg
     """
     get_bet_info()
     while True:
@@ -128,14 +121,14 @@ correct!\n")
 
 def spin(balance):
     """
-    Cretaed spin function with 2 while loops within to:
+    Created spin function with 2 while loops within to:
     checks whether user balance can cover bet,
     checks whether user balance can cover amount of lines
     """
     while True:
         lines = get_number_of_lines()
         if balance <= 3 and balance < lines:
-            print(f"\033[1;31;40m  >>>  Insufficient balance to cover\
+            print(f"\033[1;31;40m  >>>  Insufficient balance to cover \
 {lines} line(s)!\n")
             time.sleep(1.5)
         else:
@@ -146,14 +139,14 @@ def spin(balance):
         total_bet = bet * lines
         if total_bet > balance:
             print(f"\033[1;31;40m  >>>  Balance won't cover {lines} line(s)\
-you wish to bet on €{bet} each!\n")
-            print(f"\033[1;31;40m  >>>  Your current balance is €{balance}!")
+you wish to bet on €{bet} each!")
+            print(f"\033[1;31;40m  >>>  Your current balance is €{balance}!\n")
             time.sleep(1.5)
         else:
             break
 
     spin_info()
-    print(f"\033[1;33;40m                >>> You are betting €{bet} on\
+    print(f"\033[1;33;40m                >>> You are betting €{bet} on \
 {lines} line(s) <<<         ")
     print(f"\033[1;33;40m                     >>> Total bet is €{total_bet}\
 <<<         ")
@@ -163,6 +156,29 @@ you wish to bet on €{bet} each!\n")
     print_slot_mashine(reels)
     winnings, winning_lines = win_check(reels, lines, bet, symbol_value)
     return winnings - total_bet
+
+
+def spin_mashine(rows, cols, symbols):
+    """
+    Returns random columns-symbols for reels
+    """
+    all_symbols = []
+    for symbol, symbol_count in symbols.items():
+        for _ in range(symbol_count):
+            all_symbols.append(symbol)
+
+    columns = []
+    for _ in range(cols):
+        column = []
+        current_symbols = all_symbols[:]
+        for _ in range(rows):
+            value = random.choice(current_symbols)
+            current_symbols.remove(value)
+            column.append(value)
+
+        columns.append(column)
+
+    return columns
 
 
 def print_slot_mashine(columns):
@@ -186,7 +202,7 @@ def print_slot_mashine(columns):
 
 def win_check(columns, lines, bet, values):
     """
-    Checks if 3 same sybols in any lines - win
+    Checks if 3 same sybols in any lines - and prints win/loose lines
     """
     winnings = 0
     winning_lines = []
@@ -251,11 +267,54 @@ def run_menu():
         welcome_screen()
 
 
-def clear_screen():
+
+def main():
     """
-    Clears the terminal
+    main calling all required functions to run the game and checks
+    if balance suficient to play game on balance return
     """
-    os.system("cls" if os.name == "nt" else "clear")
+    clear_screen()
+    welcome_screen()
+    time.sleep(3)
+    run_menu()
+    balance = deposit()
+    if (balance > 0):
+        while True:
+            clear_screen()
+            welcome_screen()
+            print("\n\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<\
+<<<<<<<<<<<<<<<<<<<<<<")
+            print(f"\033[1;32;40m                 >>>  Current balance is \
+€{balance}! <<<                 ")
+            if balance <= 0:
+                game_over_info()
+                input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
+            else:
+                print("\033[1;34;40m                       >>>  Let's play! <<\
+<                       ")
+                print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<\
+<<<<<<<<<<<<<<<<<<<<<<<<")
+                answer = input("\033[1;31;40m>>>>>>>>>>>>>>  Press >>> Enter t\
+o Spin <<< (B to Break)  <<<<<<<<")
+                if answer == "b":
+                    break
+                balance += spin(balance)
+                input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
+    else:
+        print(f"  Your ballance is €{balance}!")
+        input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
+
+    time.sleep(0.5)
+    clear_screen()
+    welcome_screen()
+    time.sleep(0.5)
+    print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
+<<<<<<<<<<<<")
+    print(f"\n\033[1;38;10m                  >>>  Final balance is €{balance} \
+<<<")
+    game_over_info()
+    time.sleep(2)
+    main()
 
 
 # messages displayed on screen listed below:
@@ -298,6 +357,8 @@ def welcome_screen():
              ")
     print("\033[1;33;40m*****************************************************\
 *************")
+    print("\033[1;33;40m  >>>  Loading...                                    \
+             ")
 
 
 def intructions():
@@ -318,20 +379,22 @@ symbols     ")
             ")
     print("\033[1;33;40m======================================================\
 ============")
-    print("\033[1;35;10m  1. Only horizontal lines can be bet on              \
+    print("\033[1;35;10m  1. Only horizontal 1 to 3 lines can be bet on       \
             ")
     print("\033[1;35;10m  2. When betting on lines you start betting on top li\
-ne first,   ")
-    print("\033[1;35;10m     middle second and bottom third.                  \
+ne first -1-")
+    print("\033[1;35;10m     middle -2- second and bottom -3- third.          \
             ")
-    print("\033[1;35;10m  3. There is: 3 x ♥, 4 x ♦, 6 x ♠ and 7 x ♣          \
+    print("\033[1;35;10m  3. There is: 3 x ♥, 4 x ♦, 6 x ♠ and 7 x ♣ symbols  \
             ")
-    print("\033[1;35;10m  4. Valued :  ♥ - 5, ♦ - 4, ♠ - 3 and ♣ - 2          \
+    print("\033[1;35;10m  4. Valued at :  ♥ - 5, ♦ - 4, ♠ - 3 and ♣ - 2       \
+            ")
+    print("\033[1;35;10m  5. Min. bet is €1 and max is €100                   \
             ")
     print("\033[1;33;40m======================================================\
 ============")
     print("\033[1;35;10m  ! All you need is a bag of change and you're ready t\
-ogo!        ")
+o go!       ")
     print("\033[1;33;40m------------------------------------------------------\
 ------------")
 
@@ -398,61 +461,6 @@ def game_over_info():
     input("\n\033[1;33;40m  >>>  Press Enter to exit game\n")
     clear_screen()
     welcome_screen()
-
-
-def clear_screen():
-    """
-    Clears the terminal
-    """
-    os.system("cls" if os.name == "nt" else "clear")
-
-
-def main():
-    """
-    main calling all required functions to run the game
-    """
-    clear_screen()
-    welcome_screen()
-    time.sleep(2)
-    run_menu()
-    balance = deposit()
-    if (balance > 0):
-        while True:
-            clear_screen()
-            welcome_screen()
-            print("\n\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<\
-<<<<<<<<<<<<<<<<<<<<<<")
-            print(f"\033[1;32;40m                 >>>  Current balance is \
-€{balance}! <<<                 ")
-            if balance <= 0:
-                game_over_info()
-                input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
-            else:
-                print("\033[1;34;40m                       >>>  Let's play! <<\
-<                       ")
-                print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<\
-<<<<<<<<<<<<<<<<<<<<<<<<")
-                answer = input("\033[1;31;40m>>>>>>>>>>>>>>  Press >>> Enter t\
-o Spin <<< (B to Break)  <<<<<<<<")
-                if answer == "b":
-                    break
-                balance += spin(balance)
-                input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
-    else:
-        print(f"  Your ballance is €{balance}!")
-        input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
-
-    time.sleep(0.5)
-    clear_screen()
-    welcome_screen()
-    time.sleep(0.5)
-    print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
-<<<<<<<<<<<<")
-    print(f"\n\033[1;38;10m                  >>>  Final balance is €{balance} \
-<<<")
-    game_over_info()
-    time.sleep(2)
-    main()
 
 
 main()
