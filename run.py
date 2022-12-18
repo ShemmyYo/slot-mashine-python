@@ -39,13 +39,11 @@ def deposit():
     """
     deposit_info()
     print("\033[1;33;40m  Your default deposit is €100")
-    answer = input("\033[1;33;40m  >>> Press 'C' and continue or 'D' to \
-change deposit amount ").upper()
+    answer = input("\n\033[1;33;40m  >>> Press Enter and continue or \
+'C' to change deposit amount ").upper()
     if answer == "C":
-        amount = DEPOSIT
-    elif answer == "D":
         while True:
-            amount = input("\033[1;33;40m  What's your deposit? €")
+            amount = input("\n\033[1;34;40m  What's your deposit? €")
             if amount.isdigit():
                 amount = int(amount)
                 if amount > 0:
@@ -59,6 +57,8 @@ entered is not accepted!\n")
 again")
                 print("\033[1;35;40m  Amount must be a number, and \
 grater then 0")
+    else:
+        amount = DEPOSIT
 
     return amount
 
@@ -146,6 +146,10 @@ you wish to bet on €{bet} each!")
             break
 
     spin_info()
+    clear_screen()
+    welcome_screen()
+    print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<\
+<<<<<<<<<<<<<<<")
     print(f"\033[1;33;40m                >>> You are betting €{bet} on \
 {lines} line(s) <<<         ")
     print(f"\033[1;33;40m                     >>> Total bet is €{total_bet}\
@@ -244,7 +248,7 @@ def run_menu():
         print("\033[1;35;40m  >>>   Press 2 to >>> View Rules <<<")
         print("")
         print("\033[1;35;40m  >>>   Press Q to >>> Quit  Game <<<\n")
-        value = input("\033[1;33;40mYour option: ").upper()
+        value = input("\033[1;33;40m  >>>  Option: ").upper()
         if value == "1":
             time.sleep(0.5)
             clear_screen()
@@ -275,17 +279,16 @@ def main():
     """
     clear_screen()
     welcome_screen()
-    time.sleep(3)
     run_menu()
     balance = deposit()
     if (balance > 0):
         while True:
             clear_screen()
             welcome_screen()
-            print("\n\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<\
+            print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<\
 <<<<<<<<<<<<<<<<<<<<<<")
             print(f"\033[1;32;40m                 >>>  Current balance is \
-€{balance}! <<<                 ")
+€{balance}! <<<                ")
             if balance <= 0:
                 game_over_info()
                 input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
@@ -307,7 +310,6 @@ o Spin <<< (B to Break)  <<<<<<<<")
     time.sleep(0.5)
     clear_screen()
     welcome_screen()
-    time.sleep(0.5)
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
 <<<<<<<<<<<<")
     print(f"\n\033[1;38;10m                  >>>  Final balance is €{balance} \
@@ -355,10 +357,37 @@ def welcome_screen():
 *************")
     print("\033[1;31;40m                          by ShemmyYo                \
              ")
-    print("\033[1;33;40m*****************************************************\
+    print("\033[1;34;10m*****************************************************\
 *************")
-    print("\033[1;33;40m  >>>  Loading...                                    \
-             ")
+    # A List of Items need to print progress bar
+    items = list(range(0, 57))
+    l = len(items)
+    # Initial call to print 0% progress
+    printProgressBar(0, l, prefix = '\033[1;33;40mLoading: ', suffix = 'Complete\
+', length = 38)
+    for i, item in enumerate(items):
+        # Do stuff...
+        time.sleep(0.005)
+        # Update Progress Bar
+        printProgressBar(i + 1, l, prefix = 'Progress:', suffix = 'Complete\
+', length = 38)
+
+
+
+# Print iterations progress
+def printProgressBar (iteration, total, prefix = '', suffix = '\
+', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+    """
+    Call in a loop to create terminal progress bar
+    by https://stackoverflow.com
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    # Print New Line on Complete
+    if iteration == total: 
+        print()
 
 
 def intructions():
@@ -448,6 +477,18 @@ def spin_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<\
 <<<<<<<<<<<<<")
 
+
+def loading_print():
+    print("\033[1;33;40m  >>>  Loading.")
+    time.sleep(0.5)
+    clear_screen
+    print("\033[1;33;40m  >>>  Loading..", time.sleep(0.5), "." )
+    time.sleep(0.5)
+    print(".")
+    time.sleep(0.5)
+    print(".")
+    time.sleep(0.5)
+    print(".")
 
 def game_over_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
