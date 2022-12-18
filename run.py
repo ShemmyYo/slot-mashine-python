@@ -59,7 +59,6 @@ again")
 grater then 0")
     else:
         amount = DEPOSIT
-
     return amount
 
 
@@ -85,7 +84,6 @@ not accepted!\n")
             print("\033[1;35;40m  Please enter a valid number of lines")
             print(f"\033[1;35;40m  Number of lines must be a number between\
 1 and {MAX_LINES}\n")
-
     print(f"\033[1;32;40m  >>>  You bet on {lines} lines")
     return lines
 
@@ -112,10 +110,8 @@ correct!\n")
             print("\033[1;35;40m  Please enter a valid bet amount again")
             print(f"\033[1;35;40m  Bet amount must be a number between\
 €{MIN_BET} and €{MAX_BET}\n")
-
     print(f"\033[1;32;40m  >>> Your bet amount is: €{bet}\n")
     time.sleep(1)
-
     return bet
 
 
@@ -133,7 +129,6 @@ def spin(balance):
             time.sleep(1.5)
         else:
             break
-
     while True:
         bet = get_bet()
         total_bet = bet * lines
@@ -144,15 +139,14 @@ you wish to bet on €{bet} each!")
             time.sleep(1.5)
         else:
             break
-
     clear_screen()
     welcome_screen()
     progress_bar()
     spin_info()
-    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
-    print(f"\033[1;33;40m "*8 + ">>> You are betting €{bet} on \
+    print("\033[1;34;40m>"*25 + " "*15 + "<"*31)
+    print("\033[1;33;40m "*13 + f">>> You are betting €{bet} on \
 {lines} line(s) <<<" + " "*9)
-    print(f"\033[1;33;40m "*16 + ">>> Total bet is €{total_bet} <<<" + " "*17)
+    print("\033[1;33;40m "*21 + f">>> Total bet is €{total_bet} <<<" + " "*22)
     print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
     reels = spin_mashine(ROWS, COLS, symbol_count)
     print_slot_mashine(reels)
@@ -168,7 +162,6 @@ def spin_mashine(rows, cols, symbols):
     for symbol, symbol_count in symbols.items():
         for _ in range(symbol_count):
             all_symbols.append(symbol)
-
     columns = []
     for _ in range(cols):
         column = []
@@ -177,9 +170,7 @@ def spin_mashine(rows, cols, symbols):
             value = random.choice(current_symbols)
             current_symbols.remove(value)
             column.append(value)
-
         columns.append(column)
-
     return columns
 
 
@@ -188,7 +179,7 @@ def print_slot_mashine(columns):
     Prints slot mashine by transposing column to line
     """
     print(" "*66)
-    print(f"\033[1;33;40m " + "  --<+>>>>X<<<<+>--  "*3 + "  ")
+    print("\033[1;33;40m " + "  --<+>>>>X<<<<+>--  "*3 + "  ")
     for row in range(len(columns[0])):
         for i, column in enumerate(columns):
             if i != len(columns)-1:
@@ -197,7 +188,7 @@ def print_slot_mashine(columns):
             else:
                 print("\033[1;33;40m      |  ", "\033[1;31;40m\
 ", column[row], end="\033[1;33;40m    |       ")
-        print(f"\n\033[1;33;40m " + "  --<+>>>>X<<<<+>--  "*3 + "  ")
+        print("\n\033[1;33;40m " + "  --<+>>>>X<<<<+>--  "*3 + "  ")
     print(" "*66)
 
 
@@ -219,15 +210,12 @@ def win_check(columns, lines, bet, values):
             winnings += values[symbol] * bet
             winning_lines.append(line+1)
             print()
-            print("\n\033[1;33;40m               Congratulations! You won!!! \
-")
+            print("\n" + "\033[1;33;40m "*15 + "Congratulations! You won!!!")
             print("\033[1;33;40m*"*66)
             print(f"\033[1;32;40m  >>>  You have won €{winnings}! on line(s)\
 : ", *winning_lines)
-
     print("\033[1;31;40mx"*66)
     print("\033[1;31;40m  >>>  You have lost on line(s): ", *loosing_lines)
-
     return winnings, winning_lines
 
 
@@ -280,11 +268,11 @@ def main():
             clear_screen()
             welcome_screen()
             print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-            print(f"\033[1;32;40m                 >>>  Current balance is \
-€{balance}! <<<                ")
+            print("\033[1;32;40m "*17 + f">>>  Current balance is \
+€{balance}! <<<" + " "*16)
             if balance <= 0:
                 game_over_info()
-                input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
+                main()
             else:
                 print("\033[1;34;40m "*23 + ">>>  Let's play! <<<" + " "*23)
                 print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
@@ -292,20 +280,18 @@ def main():
 o Spin <<< (M for MENU)  " + "<"*9)
                 if answer == "M":
                     game_over_info()
-                    time.sleet(2)
+                    time.sleep(2)
                     main()
                 balance += spin(balance)
                 input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
     else:
         print(f"  Your ballance is €{balance}!")
         input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
-
     progress_bar()
     clear_screen()
     welcome_screen()
     print("\033[1;34;40m>"*27 + " "*11 + "<"*27)
-    print(f"\n\033[1;38;10m                  >>>  Final balance is €{balance} \
-<<\n")
+    print("\n" + "\033[1;38;10m "*18 + f">>> Final balance is €{balance} <<\n")
     progress_bar()
     game_over_info()
     time.sleep(2)
@@ -349,10 +335,8 @@ def printProgressBar(iteration, total, prefix='', suffix='\
 def welcome_screen():
     clear_screen()
     print("\033[1;33;40m*"*66)
-    print("\033[1;34;10m                 Welcome to One-Armed Bandit!        \
-             ")
-    print("                                                                  \
-")
+    print("\033[1;34;10m "*17 + "Welcome to One-Armed Bandit!" + " "*21)
+    print()
     print("\033[1;34;10m*"*66)
     print("\033[1;34;10m    ####  ##   ## #####      ####  #####  ##   ## ###\
 ## #####     ")
@@ -364,8 +348,7 @@ def welcome_screen():
    ##  ##    ")
     print("\033[1;38;10m    ####  ##   ## #####     ##  ## ##  ## ##   ## ###\
 ## #####     ")
-    print("                                                                  \
-")
+    print()
     print("\033[1;38;10m        ####     ####   ##   ##  #####   ##  ######  \
  ##          ")
     print("\033[1;37;10m        ##  ##  ##  ##  ###  ##  ##  ##  ##    ##    \
@@ -376,11 +359,9 @@ def welcome_screen():
              ")
     print("\033[1;34;10m        ####    ##  ##  ##   ##  #####   ##    ##    \
  ##          ")
-    print("                                                                  \
-")
+    print()
     print("\033[1;34;10m*"*66)
-    print("\033[1;31;40m                          by ShemmyYo                \
-             ")
+    print("\033[1;31;40m "*26 + "by ShemmyYo" + " "*29)
     print("\033[1;34;10m*"*66)
 
 
@@ -452,8 +433,6 @@ def game_over_info():
     print("\033[1;33;40m "*24 + ">>> Good-Bye! <<<" + " "*25)
     print("\033[1;34;40m>"*27 + " "*11 + "<"*29)
     input("\n\033[1;33;40m  >>>  Press Enter to exit game\n")
-    clear_screen()
-    welcome_screen()
 
 
 main()
