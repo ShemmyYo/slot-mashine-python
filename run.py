@@ -145,9 +145,9 @@ you wish to bet on €{bet} each!")
         else:
             break
 
-    spin_info()
     clear_screen()
     welcome_screen()
+    progress_bar()
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<\
 <<<<<<<<<<<<<<<")
     print(f"\033[1;33;40m                >>> You are betting €{bet} on \
@@ -199,7 +199,6 @@ def print_slot_mashine(columns):
             else:
                 print("\033[1;33;40m      |  ", "\033[1;31;40m\
 ", column[row], end="\033[1;33;40m    |       ")
-
         print(f"\n\033[1;33;40m   --<+>>>>X<<<<+>--    --<+>>>>X<<<<+>--    \
 --<+>>>>X<<<<+>--    ")
 
@@ -243,7 +242,6 @@ def run_menu():
     while True:
         run_menu_info()
         print("\033[1;33;40m  Choose option from the list below:\n")
-
         print("\033[1;35;40m  >>>   Press 1 to >>> Play  Game <<<")
         print("\033[1;35;40m  >>>   Press 2 to >>> View Rules <<<")
         print("")
@@ -265,11 +263,8 @@ def run_menu():
         else:
             print(f"\033[1;31;40m  '{value}' is not valid!")
             time.sleep(1)
-            clear_screen()
-            welcome_screen()
         clear_screen()
         welcome_screen()
-
 
 
 def main():
@@ -279,6 +274,8 @@ def main():
     """
     clear_screen()
     welcome_screen()
+    progress_bar()
+    time.sleep(0.5)
     run_menu()
     balance = deposit()
     if (balance > 0):
@@ -298,29 +295,64 @@ def main():
                 print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<\
 <<<<<<<<<<<<<<<<<<<<<<<<")
                 answer = input("\033[1;31;40m>>>>>>>>>>>>>>  Press >>> Enter t\
-o Spin <<< (B to Break)  <<<<<<<<")
-                if answer == "b":
-                    break
+o Spin <<< (M for MENU)  <<<<<<<<")
+                if answer == "m":
+                    main()
                 balance += spin(balance)
                 input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
     else:
         print(f"  Your ballance is €{balance}!")
         input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
 
-    time.sleep(0.5)
+    progress_bar()
     clear_screen()
     welcome_screen()
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
-<<<<<<<<<<<<")
+<<<<<<<<<<<")
     print(f"\n\033[1;38;10m                  >>>  Final balance is €{balance} \
-<<<")
+<<\n")
+    progress_bar()
     game_over_info()
     time.sleep(2)
     main()
 
 
-# messages displayed on screen listed below:
+# Progress bar function copied from https://stackoverflow.com
+def progress_bar():
+    # A List of Items need to print progress bar
+    items = list(range(0, 57))
+    lengh = len(items)
+    # Initial call to print 0% progress
+    printProgressBar(0, lengh, prefix='\033[1;33;40mLoading: ', suffix='\
+Complete', length=38)
+    for i, item in enumerate(items):
+        # Do stuff...
+        time.sleep(0.005)
+        # Update Progress Bar
+        printProgressBar(i + 1, lengh, prefix='Progress:', suffix='Complete\
+', length=38)
+
+
+# Print iterations progress copied from https://stackoverflow.com
+def printProgressBar(iteration, total, prefix='', suffix='\
+', decimals=1, length=100, fill='█', printEnd="\r"):
+    """
+    Call in a loop to create terminal progress bar
+    by https://stackoverflow.com
+    """
+    percent = ("{0:." + str(decimals) + "f}\
+").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end=printEnd)
+    # Print New Line on Complete
+    if iteration == total:
+        print()
+
+
+# all messages displayed on screen listed below:
 def welcome_screen():
+    clear_screen()
     print("\033[1;33;40m*****************************************************\
 *************")
     print("\033[1;34;10m                 Welcome to One-Armed Bandit!        \
@@ -359,35 +391,6 @@ def welcome_screen():
              ")
     print("\033[1;34;10m*****************************************************\
 *************")
-    # A List of Items need to print progress bar
-    items = list(range(0, 57))
-    l = len(items)
-    # Initial call to print 0% progress
-    printProgressBar(0, l, prefix = '\033[1;33;40mLoading: ', suffix = 'Complete\
-', length = 38)
-    for i, item in enumerate(items):
-        # Do stuff...
-        time.sleep(0.005)
-        # Update Progress Bar
-        printProgressBar(i + 1, l, prefix = 'Progress:', suffix = 'Complete\
-', length = 38)
-
-
-
-# Print iterations progress
-def printProgressBar (iteration, total, prefix = '', suffix = '\
-', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
-    """
-    Call in a loop to create terminal progress bar
-    by https://stackoverflow.com
-    """
-    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-    filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
-    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
-    # Print New Line on Complete
-    if iteration == total: 
-        print()
 
 
 def intructions():
@@ -426,7 +429,6 @@ ne first -1-")
 o go!       ")
     print("\033[1;33;40m------------------------------------------------------\
 ------------")
-
     answer = input("\033[1;33;40m  >>>  Press Enter to go to >>> MAIN MENU <<<\
  (Q to Quit)  <<<    \n").upper()
     if answer == "Q":
@@ -477,18 +479,6 @@ def spin_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>                <<<<<<<<<<<<<\
 <<<<<<<<<<<<<")
 
-
-def loading_print():
-    print("\033[1;33;40m  >>>  Loading.")
-    time.sleep(0.5)
-    clear_screen
-    print("\033[1;33;40m  >>>  Loading..", time.sleep(0.5), "." )
-    time.sleep(0.5)
-    print(".")
-    time.sleep(0.5)
-    print(".")
-    time.sleep(0.5)
-    print(".")
 
 def game_over_info():
     print("\033[1;34;40m>>>>>>>>>>>>>>>>>>>>>>>>>>>           <<<<<<<<<<<<<<<<\
