@@ -2,13 +2,26 @@
 
 ## One-Armed Bandit!
 
-> Known also as slot machine (American English), fruit machine (British English) or poker machine (Australian English and New Zealand English [Wikipedia](https://en.wikipedia.org/wiki/One_Armed_Bandit) and is a gambling game that creates a game of chance for its customers - this is my take on this classic.
+> known also as slot machine (American English), fruit machine (British English) or poker machine (Australian English and New Zealand English and is a gambling game that creates a game of chance for its customers [Wikipedia](https://en.wikipedia.org/wiki/One_Armed_Bandit) 
 
-One-Armed Bandit! is a Command Line Interface styled application, designed for a user to play this classic game. 
-It has been deployed on Heroku using Code Institute's mock terminal to run.
+It is a Python terminal game, deployed on Heroku using Code Institute's mock terminal to run.
 This project has been designed for educational purposes 
 
-You can view the live program here: <a href ='https://shemmy-slot-mashine.herokuapp.com/' target="_blank">One-Armed Bandit!</a>
+Users are welcomed by the main menu where they can choose option 1 to start the game or option 2 to view the rules (Q to Quit). 
+
+After choosing to start the game they are given the option to start with a default balance of €100 or change the difficulty and set their own amount to be used as a start balance. 
+
+Next, users are asked to choose the number of lines they wish to bet on (1-3). The more lines the bigger chance of winning, however, the user bet is then multiplied by the number of lines the user wishes to bet on and deducted from the total balance. Once, users choose the number of lines to be on, this information is confirmed and printed back to the screen. 
+
+Users then are asked to type in how much would they like to bet per line - this information is also confirmed and printed back to users unless the balance is insufficient to cover the bet. in this instance, users are asked to repeat and choose the number of lines to bet on and confirm bet per line.
+
+Once lines and bet are confirmed, users are presented with the information of their bet total, results of the round and lines and amount they won/lost on. 
+
+The total balance is then adjusted and, if allowed to play, users are asked to play another round. 
+If a user loses the whole balance, the game is over and users are brought back to the main menu.
+
+You can view the live, deployed application here: <a href ='https://shemmy-slot-mashine.herokuapp.com/' target="_blank">One-Armed Bandit!</a>
+
 
 ![One-Armed Bandit! image](assets/images/slot-mashine-screen.png)
 
@@ -20,13 +33,12 @@ You can view the live program here: <a href ='https://shemmy-slot-mashine.heroku
 
 ## __Tech Stack__
 
-<img height="45" src="assets/other/python-icon.png"> __Python3__
-<img height="50" src="assets/other/gitpod.png"> __Gitpod__
-<img height="45" src="assets/other/github.png"> __Git__
+<img height="45" src="assets\images\python-icon.png"> __Python3__ 
+<img height="50" src="assets\images\gitpod.png"> __Gitpod__ 
+<img height="45" src="assets\images\github.png"> __Git__
 
-<img height="42" src="assets/other/html.png"> __HTML5__
-<img height="50" src="assets/other/css-img.png"> __CSS3__
-<img height="45" src="assets/other/js.png"> __JavaScript__
+<img height="42" src="assets\images\html.png"> __HTML5__
+<img height="50" src="assets\images\css-img.png"> __CSS3__
 
 ***
 
@@ -35,7 +47,6 @@ You can view the live program here: <a href ='https://shemmy-slot-mashine.heroku
 - [Project Goal](#project-goal)
 - [Brief](#brief)
 - [UX User Experience](#ux-user-experience)
-    - [Site Aim](#site-aim)
     - [User Stories](#user-stories)
     - [Flowchart](#flowchart)
 - [Features](#features)
@@ -59,24 +70,46 @@ You can view the live program here: <a href ='https://shemmy-slot-mashine.heroku
 
 ***
 ## __Project Goals__
+
+The project goal was to create a user-friendly game and deliver an easy and satisfiying command line interface directory.
+
+The project has been built by using Python.
+
 [Back to top](<#contents>)
 ***
 ## __Brief__
+
+I wish to demonstrate my competency as a Software Developer and showcase Python skills and abilities to potential Employers / Recruiters and all who want to cooperate with me on future projects.
+
 [Back to top](<#contents>)
 ***
 ## __UX User Experience__
-[Back to top](<#contents>)
-***
-### __Site Aim__
-[Back to top](<#contents>)
-***
 ### __User Stories__
+
+__As a Player, I wish:__ 
+- to play a simple and fun but still challenging game.
+- to be able to see instructions before the start of the game.
+- to play a game that navigates easyly.
+- to be able to set bet amount.
+- to be able to change game difficulty by changing number of lines I bet on.
+- to be given feedback if I entered invalid data. 
+- to be able to go reset the game.
+- to be able to see current balance.
+- to be encouraged to replay and increase scores.
+
 [Back to top](<#contents>)
 ***
 ### __Flowchart__
+
+The below flowchart has been created prior to my code to give me a clear view of what needed to be implemented. It clearly indicates the layout and structure of the program including where the user needs to be asked for input, where the computer validates the input and how to handle invalid inputs, where the program should subtract and add to the user's balance.
+
+![Flowchart](/assets/images/flow-chart.png)
+
 [Back to top](<#contents>)
 ***
 ## __Features__
+
+
 [Back to top](<#contents>)
 ***
 ### __Existing Features__
@@ -94,7 +127,11 @@ You can view the live program here: <a href ='https://shemmy-slot-mashine.heroku
 ### __Future Features__
 #### __High Scores__
 
+- Player class - to be able to manage, save and read player score.
+
 - Local Leaderboard - I plan to add local high-score board so users can see how they compare to other users.
+
+- Game difficulty level - I would like to be able to choose the game's difficulty.
 
 [Back to top](<#contents>)
 ***
@@ -115,7 +152,7 @@ You can view the live program here: <a href ='https://shemmy-slot-mashine.heroku
 - [CI Python Linter](https://pep8ci.herokuapp.com/)
 - [PyInputPlus](https://pypi.org/project/PyInputPlus/) - used to validate user inputs
 
-### __Imported Libraries and Packages_
+### __Imported Libraries and Packages__
 
 - [random](https://docs.python.org/3/library/random.html) was used to select symbols for reels
 - [os](https://docs.python.org/3/library/os.html) was used to create the clear_screen function to enhance user experience and reduce clutter on screen

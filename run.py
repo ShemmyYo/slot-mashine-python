@@ -25,6 +25,17 @@ symbol_value = {
 }
 
 
+class Player:
+    """
+    Player class used to create player
+    """
+    def __init__(self, name, place, round, balance):
+        self.name = name
+        self.place = place
+        self.rounds = 0
+        self.balance = 0
+
+
 def clear_screen():
     """
     Clears the terminal
@@ -143,11 +154,11 @@ you wish to bet on €{bet} each!")
     welcome_screen()
     progress_bar()
     spin_info()
-    print("\033[1;34;40m>"*25 + " "*15 + "<"*31)
+    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
     print("\033[1;33;40m "*13 + f">>> You are betting €{bet} on \
 {lines} line(s) <<<" + " "*9)
     print("\033[1;33;40m "*21 + f">>> Total bet is €{total_bet} <<<" + " "*22)
-    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
+    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
     reels = spin_mashine(ROWS, COLS, symbol_count)
     print_slot_mashine(reels)
     winnings, winning_lines = win_check(reels, lines, bet, symbol_value)
