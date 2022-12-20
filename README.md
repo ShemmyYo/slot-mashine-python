@@ -7,11 +7,12 @@
 It is a Python terminal game, deployed on Heroku using Code Institute's mock terminal to run.
 This project has been designed for educational purposes 
 
-Users are welcomed by the main menu where they enter name and city before being brought to the main menu where they can choose option 1 to start the game or option 2 to view the rules (Q to Quit). 
+Users are welcomed by the main menu where they enter name and city before being brought to the main menu where they can choose option 1 to start the game or option 2 to view instructions (Q to Quit). 
 
-After choosing to start the game they are given the option to start with a default balance of €100 or change the difficulty and set their own amount to be used as a start balance. 
+After choosing to start the game they are type in their name and city .
+Users are given the option to start with a default balance of €100 or change it to pre-defined amount or set it manually hence change difficulty level.
 
-Next, users are asked to choose the number of lines they wish to bet on (1-3). The more lines the bigger chance of winning, however, the user bet is then multiplied by the number of lines the user wishes to bet on and deducted from the total balance. Once, users choose the number of lines to be on, this information is confirmed and printed back to the screen. 
+Next, users are asked to choose the number of lines they wish to bet on (1-3). The more lines the bigger chance of winning, however, the user bet is then multiplied by the number of lines the user wishes to bet on and deducted from the total balance. Once, users choose the number of lines to bet on, this information is confirmed and printed back to the screen. 
 
 Users then are asked to type in how much would they like to bet per line - this information is also confirmed and printed back to users unless the balance is insufficient to cover the bet. in this instance, users are asked to repeat and choose the number of lines to bet on and confirm bet per line.
 
@@ -137,7 +138,7 @@ The user is welcomed to the game wtih game logo and prompted to input their deta
 ### __Main Menu__
 Main menu enables the user to start the game, view the game instructions and exit the game.
 
-<details><summary>Main Menu IMAGE</summary>
+<details open><summary>Main Menu IMAGE</summary>
 
 ![Main Menu](assets/images/main-menu.png)
 </details>
@@ -148,7 +149,7 @@ Main menu enables the user to start the game, view the game instructions and exi
 Option 2 on main menu displays game instructions. 
 You can come back to the main menu by hitting the Enter key or quit by hitting Q key.
 
-<details><summary>Instructions IMAGE</summary>
+<details open><summary>Instructions IMAGE</summary>
 
 ![Instructions](assets/images/instructions.png)
 </details>
@@ -158,7 +159,7 @@ You can come back to the main menu by hitting the Enter key or quit by hitting Q
 ### __Deposit Change Option (difficulty level)__
 Changing deposit may make the game easier (if set to higher) or more diffcult (if set lower)
 
-<details><summary>Deposit Change Option IMAGE</summary>
+<details open><summary>Deposit Change Option IMAGE</summary>
 
 ![Deposit Change Option](assets/images/deposit.png)
 </details>
@@ -168,7 +169,7 @@ Changing deposit may make the game easier (if set to higher) or more diffcult (i
 ### __Setting lines to bet on and bet mount (difficulty level)__
 Users can set the number of lines (1-3) to bet on and bet amount which makes the game easier (if set to 3 lines) or more diffcult (if set 1 lines)
 
-<details><summary>Setting lines and bet IMAGE</summary>
+<details open><summary>Setting lines and bet IMAGE</summary>
 
 ![Setting lines and bet](assets/images/lines-bet.png)
 </details>
@@ -179,9 +180,19 @@ Users can set the number of lines (1-3) to bet on and bet amount which makes the
 Reluts are presented in grapicly same way as on a realone-armed bandid.
 Each line is analised and results for each line is printed (includin the amount won/lost and number of winning/loosing lines)
 
-<details><summary>Results IMAGE</summary>
+<details open><summary>Results IMAGE</summary>
 
 ![Results](assets/images/turn-results.png)
+</details>
+
+***
+
+### __Progress Bar__
+Added for visual enhancment. 
+
+<details open><summary>Progress Bar IMAGE</summary>
+
+![Progress Bar](assets/images/progress-bar.png)
 </details>
 
 ***
@@ -189,7 +200,7 @@ Each line is analised and results for each line is printed (includin the amount 
 ### __Game Over__
 Showing final result of the game
 
-<details><summary>Game Over IMAGE</summary>
+<details open><summary>Game Over IMAGE</summary>
 
 ![Game Over](assets/images/game-over.png)
 </details>
@@ -301,7 +312,6 @@ I sometimes applied principles within them to the site, after fully understandin
 ### __Design__
 
 - Flowchart was made using 
-- [Colorama tutorial](https://youtu.be/u51Zjlnui4Y) - For all coloured text
 
 [Back to Content](<#contents>)
 ***

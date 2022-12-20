@@ -74,25 +74,40 @@ def deposit(player):
     if input is a valid number and prints msg.
     """
     deposit_info()
-    print(f"\033[1;35;40m  {player.name}, your default deposit is €100")
+    print(f"\033[1;33;40m  {player.name}, your default deposit is €100")
     answer = input("\n\033[1;35;10m  >>> Press Enter and continue or \
 'C' to change deposit amount ").upper()
     if answer == "C":
+        print(f"\n\033[1;33;40m  {player.name}, lets's set your deposit set! ")
+        print("\033[1;37;10m  >>>  Press 'F' to set it to €50 ")
+        print("\033[1;37;10m  >>>  Press 'B' to go back and leave it at €100 ")
+        print("\033[1;37;10m  >>>  Press 'T' to set it to €200 ")
+        print("\033[1;37;10m  >>>  Press 'M' to set it manually ")
         while True:
-            amount = input(f"\033[1;35;40m  {player.name}, what's your deposit? €")
-            if amount.isdigit():
-                amount = int(amount)
-                if amount > 0:
-                    break
+            selection = input(f"\n\033[1;33;40m  {player.name}, what's your decision? ").upper()
+            if selection == "F":
+                amount = 50
+            elif selection == "T":
+                amount = 200
+            elif selection == "B":
+                amount = 100
+                break
+            elif selection == "M":
+                amount = input(f"\033[1;33;40m  {player.name}, what's your deposit? €")
+                if amount.isdigit():
+                    amount = int(amount)
+                    if amount > 0:
+                        break
+                    else:
+                        print("  !!!  NOTE: Amount must be grater then 0")
                 else:
-                    print("  !!!  NOTE: Amount must be grater then 0")
-            else:
-                print(f"\033[1;31;40m  !!!  NOTE: '{amount}', you \
+                    print(f"\033[1;31;40m  !!!  NOTE: '{amount}', you \
 entered is not accepted!\n")
-                print(f"\033[1;35;40m  {player.name}, please enter a valid amount \
+                    print(f"\033[1;35;40m  {player.name}, please enter a valid amount \
 again")
-                print("\033[1;35;40m  Amount must be a number, and \
+                    print("\033[1;35;40m  Amount must be a number, and \
 grater then 0")
+            
     else:
         amount = DEPOSIT
     return amount
