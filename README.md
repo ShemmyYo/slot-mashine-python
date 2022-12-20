@@ -1,4 +1,4 @@
-# __Project Portfolio 3 - Python__
+# Project Portfolio 3 - Python
 
 ## One-Armed Bandit!
 
@@ -7,7 +7,7 @@
 It is a Python terminal game, deployed on Heroku using Code Institute's mock terminal to run.
 This project has been designed for educational purposes 
 
-Users are welcomed by the main menu where they can choose option 1 to start the game or option 2 to view the rules (Q to Quit). 
+Users are welcomed by the main menu where they enter name and city before being brought to the main menu where they can choose option 1 to start the game or option 2 to view the rules (Q to Quit). 
 
 After choosing to start the game they are given the option to start with a default balance of €100 or change the difficulty and set their own amount to be used as a start balance. 
 
@@ -49,10 +49,15 @@ You can view the live, deployed application here: <a href ='https://shemmy-slot-
 - [UX User Experience](#ux-user-experience)
     - [User Stories](#user-stories)
     - [Flowchart](#flowchart)
+    - [Class Object](#classobject)
 - [Features](#features)
     - [Existing Features](#existing-features)
+        - [Main Menu](#main-menu)
         - [Instructions](#home)
-        - [Game](#game)
+        - [Deposit Change Option](#deposit)
+        - [Setting lines to bet on and bet mount (difficulty level)](#difficulty)
+        - [Turn results](#turn-results)
+        - [Game Over](#game-over)
     - [Future Features](#future-features)
         - [High Scores](#scores)
 - [Technologies Used](#technologies-used)
@@ -75,13 +80,13 @@ The project goal was to create a user-friendly game and deliver an easy and sati
 
 The project has been built by using Python.
 
-[Back to top](<#contents>)
+[Back to Content](<#contents>)
 ***
 ## __Brief__
 
 I wish to demonstrate my competency as a Software Developer and showcase Python skills and abilities to potential Employers / Recruiters and all who want to cooperate with me on future projects.
 
-[Back to top](<#contents>)
+[Back to Content](<#contents>)
 ***
 ## __UX User Experience__
 ### __User Stories__
@@ -97,7 +102,7 @@ __As a Player, I wish:__
 - to be able to see current balance.
 - to be encouraged to replay and increase scores.
 
-[Back to top](<#contents>)
+[Back to Content](<#contents>)
 ***
 ### __Flowchart__
 
@@ -105,35 +110,100 @@ The below flowchart has been created prior to my code to give me a clear view of
 
 ![Flowchart](/assets/images/flow-chart.png)
 
+### __Class Object__
+OOC (Object Oriented Class) has been added in this project to create a Player class.
+I used [Real Python](https://realpython.com/python3-object-oriented-programming/) to create it.
+
+```python
+class Player:
+    def __init__(self, name, place, rounds, balance):
+        self.name = name
+        self.place = place
+        self.rounds = 0
+        self.balance = DEPOSIT
+```
+
 [Back to top](<#contents>)
 ***
+
 ## __Features__
+### __Welcome Screen__
+The user is welcomed to the game wtih game logo and prompted to input their details.
 
+![Welcome Screen](assets/images/welcome-name.png)
 
-[Back to top](<#contents>)
 ***
-### __Existing Features__
-[Back to top](<#contents>)
-***
-#### __Instructions__
-[Back to top](<#contents>)
-***
-#### __Game__
-[Back to top](<#contents>)
-***
-#### __Instructions__
-[Back to top](<#contents>)
-***
-### __Future Features__
-#### __High Scores__
 
-- Player class - to be able to manage, save and read player score.
+### __Main Menu__
+Main menu enables the user to start the game, view the game instructions and exit the game.
 
-- Local Leaderboard - I plan to add local high-score board so users can see how they compare to other users.
+<details><summary>Main Menu IMAGE</summary>
 
-- Game difficulty level - I would like to be able to choose the game's difficulty.
+![Main Menu](assets/images/main-menu.png)
+</details>
 
-[Back to top](<#contents>)
+***
+
+### __Instructions__
+Option 2 on main menu displays game instructions. 
+You can come back to the main menu by hitting the Enter key or quit by hitting Q key.
+
+<details><summary>Instructions IMAGE</summary>
+
+![Instructions](assets/images/instructions.png)
+</details>
+
+***
+
+### __Deposit Change Option (difficulty level)__
+Changing deposit may make the game easier (if set to higher) or more diffcult (if set lower)
+
+<details><summary>Deposit Change Option IMAGE</summary>
+
+![Deposit Change Option](assets/images/deposit.png)
+</details>
+
+***
+
+### __Setting lines to bet on and bet mount (difficulty level)__
+Users can set the number of lines (1-3) to bet on and bet amount which makes the game easier (if set to 3 lines) or more diffcult (if set 1 lines)
+
+<details><summary>Setting lines and bet IMAGE</summary>
+
+![Setting lines and bet](assets/images/lines-bet.png)
+</details>
+
+***
+
+### __Turn results__
+Reluts are presented in grapicly same way as on a realone-armed bandid.
+Each line is analised and results for each line is printed (includin the amount won/lost and number of winning/loosing lines)
+
+<details><summary>Results IMAGE</summary>
+
+![Results](assets/images/turn-results.png)
+</details>
+
+***
+
+### __Game Over__
+Showing final result of the game
+
+<details><summary>Game Over IMAGE</summary>
+
+![Game Over](assets/images/game-over.png)
+</details>
+
+[Back to Content](<#contents>)
+***
+
+## __Future Features__
+### __High Scores__
+
+Game high-scores - I plan to add local high-score board so users can see how they compare to other users.
+
+
+[Back to Content](<#contents>)
 ***
 ## __Technologies Used__
 
@@ -158,7 +228,13 @@ The below flowchart has been created prior to my code to give me a clear view of
 - [os](https://docs.python.org/3/library/os.html) was used to create the clear_screen function to enhance user experience and reduce clutter on screen
 - [time](https://docs.python.org/3/library/time.html) used time.sleep to enhance user experience and to pause
 
-[Back to top](<#contents>)
+[Back to Content](<#contents>)
+***
+
+## __Testing__
+### __test___
+
+[Back to Content](<#contents>)
 ***
 ## __Deployment__
 ### __Deploy to Heroku__
@@ -189,7 +265,7 @@ For Heroku deployment, follow these steps to connect your GitHub repository to t
 
 The frontend terminal should now be connected and deployed to Heroku.
 
-[Back to top](<#contents>)
+[Back to Content](<#contents>)
 ***
 ### __Local Deployment__
 
@@ -197,7 +273,7 @@ To make a local copy of this project, you can clone it. In your IDE Terminal, ty
 
 - `git clone https://github.com/shemmyyo/slot-mashine-python.git`
 
-[Back to top](<#contents>)
+[Back to Content](<#contents>)
 ***
 ### __To Fork the Repository__
 
@@ -208,14 +284,14 @@ To make a copy or ‘fork’ the repository -
 
 Alternatively, if using Gitpod, you can click below to create your workspace using this repository
 
-[Back to top](<#contents>)
+[Back to Content](<#contents>)
 ***
 ## __Credits__
 
 Throughout the building process I found many helpful tutorials online.
 I sometimes applied principles within them to the site, after fully understanding their code and modifying to fit the site's needs.
 
-[Back to top](<#contents>)
+[Back to Content](<#contents>)
 ### __Code__
 
 - Code to create clear_screen function taken from [GeeksforGeeks](https://www.geeksforgeeks.org/clear-screen-python/)
@@ -227,6 +303,7 @@ I sometimes applied principles within them to the site, after fully understandin
 - Flowchart was made using 
 - [Colorama tutorial](https://youtu.be/u51Zjlnui4Y) - For all coloured text
 
+[Back to Content](<#contents>)
 ***
 ## __Acknowledgements__
 
@@ -236,7 +313,4 @@ One-Armed Bandit! was developed for educational purpouses and as part of my Dipl
 
 Shemmy, 2022
 
-[Back to top](<#contents>)
-***
-The End
-
+[Back to top](<#project-portfolio-3---python>)

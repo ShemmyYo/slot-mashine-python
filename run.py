@@ -48,11 +48,13 @@ def player_details():
     """
     player_info()
     while True:
-        player_name = input("\033[1;33;40m  >>>  What is your name? >>> ").capitalize()
+        player_name = input("\033[1;33;40m  >>>  What is your name? \
+>>> ").capitalize()
         if player_name.isalpha():
             place = False
             while not place:
-                player_place = input("\033[1;33;40m  >>>  Where are you from? >>> ").capitalize()
+                player_place = input("\033[1;33;40m  >>>  Which city \
+are you from? >>> ").capitalize()
                 if player_place.isalpha():
                     player = Player(name=player_name, place=player_place,
                                     rounds=0, balance=DEPOSIT)
