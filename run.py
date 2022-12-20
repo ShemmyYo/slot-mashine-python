@@ -38,7 +38,7 @@ class Player:
     def __init__(self, name, place, rounds, balance):
         self.name = name
         self.place = place
-        self.rounds = 0
+        self.rounds = 1
         self.balance = DEPOSIT
 
 
@@ -57,7 +57,7 @@ def player_details():
 are you from? >>> ").capitalize()
                 if player_place.isalpha():
                     player = Player(name=player_name, place=player_place,
-                                    rounds=0, balance=DEPOSIT)
+                                    rounds=1, balance=DEPOSIT)
                     return player
                 else:
                     clear_screen()
@@ -180,7 +180,7 @@ def spin(balance, player):
     clear_screen()
     welcome_screen()
     progress_bar()
-    spin_info()
+    spin_info(player)
     print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
     print("\033[1;33;40m "*13 + f">>> You are betting €{bet} on \
 {lines} line(s) <<<" + " "*9)
@@ -307,12 +307,12 @@ def main():
         while True:
             clear_screen()
             welcome_screen()
-            print("\033[1;33;40m "*26 + f"+++  {player.name}  +++")
+            print("\033[1;33;40m "*20 + f"+++  {player.name}, Round: {player.rounds}  +++")
             print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
             print("\033[1;32;40m "*17 + f">>>  Current balance is \
 €{balance}! <<<" + " "*16)
             if balance <= 0:
-                game_over_info()
+                game_over_info(player)
                 main()
             else:
                 print("\033[1;34;40m "*23 + ">>>  Let's play! <<<" + " "*23)
@@ -320,10 +320,12 @@ def main():
                 answer = input("\033[1;31;40m>"*13 + "  Press >>> Enter t\
 o Spin <<< (M for MENU)  " + "<"*9).upper()
                 if answer == "M":
-                    game_over_info()
+                    game_over_info(player)
                     time.sleep(2)
                     main()
                 balance += spin(balance, player)
+                player.balance = balance
+                player.rounds += 1
                 input("\n\033[1;33;40m  >>>  Press Enter to continue\n")
     else:
         print(f"  Your ballance is €{balance}!")
@@ -334,7 +336,7 @@ o Spin <<< (M for MENU)  " + "<"*9).upper()
     print("\033[1;34;40m>"*27 + " "*11 + "<"*27)
     print("\n" + "\033[1;38;10m "*18 + f">>> Final balance is €{balance} <<\n")
     progress_bar()
-    game_over_info()
+    game_over_info(player)
     time.sleep(2)
     main()
 
@@ -469,19 +471,20 @@ def get_bet_info():
     print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
 
 
-def spin_info():
+def spin_info(player):
     print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
-    print("\033[1;35;10m "*22 + ">>>  Turn Results  <<<" + " "*22)
+    print("\033[1;35;10m "*20 + f">>>  Turn {player.rounds} Results  <<<" + " "*20)
     print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
 
 
-def game_over_info():
+def game_over_info(player):
     print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    print("\033[1;33;40m "*12 + f">>> {player.name} you played {player.rounds} round(s)! <<<")
+    print("\033[1;35;10m "*15 + f">>> Your final balance is €{player.balance} <<<")
     print("\033[1;31;40m "*24 + ">>> GAME OVER <<<" + " "*25)
     print("\033[1;33;40m "*24 + ">>> Good-Bye! <<<" + " "*25)
     print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
     input("\n\033[1;33;40m  >>>  Press Enter to exit game\n")
 
 
-if __name__ == '__main__':
-    main()
+main()
