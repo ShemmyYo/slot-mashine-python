@@ -90,36 +90,20 @@ def deposit(player):
 'C' to change deposit amount ").upper()
     if answer == "C":
         print(f"\n\033[1;33;40m  {player.name}, lets's set your deposit set! ")
-        print("\033[1;37;10m  >>>  Press 'F' to set it to €50 ")
-        print("\033[1;37;10m  >>>  Press 'B' to go back and leave it at €100 ")
-        print("\033[1;37;10m  >>>  Press 'T' to set it to €200 ")
-        print("\033[1;37;10m  >>>  Press 'M' to set it manually ")
+        print("\033[1;37;10m  >>>  Press '1' to set it to €50 ")
+        print("\033[1;37;10m  >>>  Press '2' to set it tt €100 ")
+        print("\033[1;37;10m  >>>  Press '3' to set it to €200 ")
         while True:
             selection = input(f"\n\033[1;33;40m  {player.name}, what's your decision? ").upper()
-            if selection == "F":
+            if selection == "1":
                 amount = 50
                 break
-            elif selection == "T":
-                amount = 200
-                break
-            elif selection == "B":
+            elif selection == "2":
                 amount = 100
                 break
-            elif selection == "M":
-                amount = input(f"\n\033[1;33;40m  {player.name}, what's your deposit? € ")
-                if amount.isdigit():
-                    amount = int(amount)
-                    if amount > 0:
-                        break
-                    else:
-                        print("  !!!  NOTE: Amount must be grater then 0")
-                else:
-                    print(f"\033[1;31;40m  !!!  NOTE: '{amount}', you \
-entered is not accepted!\n")
-                    print(f"\033[1;35;40m  {player.name}, please enter a valid amount \
-again")
-                    print("\033[1;35;40m  Amount must be a number, and \
-grater then 0")
+            elif selection == "3":
+                amount = 200
+                break
             else:
                 print(f"\n\033[1;31;40m  !!!  NOTE: '{selection}', you \
 entered is not accepted!\n")
