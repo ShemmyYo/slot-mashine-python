@@ -1,6 +1,22 @@
 import random
 import time
 import os
+import gspread
+from google.oauth2.service_account import Credentials
+
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('slot_mashine')
+
+highscores = SHEET.worksheet('highscores')
+highscores_rounds = highscores.get_all_values()
 
 MAX_LINES = 3
 MAX_BET = 100
@@ -48,7 +64,7 @@ def player_details():
     """
     player_info()
     while True:
-        player_name = input("\033[1;33;40m  >>>  What is your name? \
+        player_name = input("\033[1;33;40m  >>>  What is your name Player? \
 >>> ").capitalize()
         if player_name.isalpha():
             place = False
@@ -60,7 +76,6 @@ are you from? >>> ").capitalize()
                                     rounds=1, balance=DEPOSIT)
                     return player
                 else:
-                    clear_screen()
                     print(f"\033[1;31;40m  '{player_place}' is not valid")
                     print("\033[1;31;40m  !!!  Only letters please")
         else:
@@ -87,13 +102,15 @@ def deposit(player):
             selection = input(f"\n\033[1;33;40m  {player.name}, what's your decision? ").upper()
             if selection == "F":
                 amount = 50
+                break
             elif selection == "T":
                 amount = 200
+                break
             elif selection == "B":
                 amount = 100
                 break
             elif selection == "M":
-                amount = input(f"\033[1;33;40m  {player.name}, what's your deposit? €")
+                amount = input(f"\n\033[1;33;40m  {player.name}, what's your deposit? € ")
                 if amount.isdigit():
                     amount = int(amount)
                     if amount > 0:
@@ -107,6 +124,10 @@ entered is not accepted!\n")
 again")
                     print("\033[1;35;40m  Amount must be a number, and \
 grater then 0")
+            else:
+                print(f"\n\033[1;31;40m  !!!  NOTE: '{selection}', you \
+entered is not accepted!\n")
+                print("\033[1;31;40m  Choose from the above options!")
             
     else:
         amount = DEPOSIT
@@ -192,8 +213,6 @@ def spin(balance, player):
             time.sleep(1.5)
         else:
             break
-    clear_screen()
-    welcome_screen()
     progress_bar()
     spin_info(player)
     print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
@@ -272,6 +291,40 @@ def win_check(columns, lines, bet, values, player):
     return winnings, winning_lines
 
 
+def update_highscores(player):
+    """
+    updates the highscores
+    """
+    for count, score in enumerate(highscores_rounds[1:11], 2):
+        if player.rounds > int(score[2]):
+            print(f"Well done {player.name}, you made the top 10!")
+            player_as_list = [player.name, player.place, player.rounds]
+            highscores.append_row(player_as_list)
+            highscores.sort((3, 'des'), range='A2:C999')
+            highscores.delete_rows(12)
+            break
+    else:
+        print(f"No can do {player.name}, You didn't make the top 10")
+
+
+def display_highscores():
+    """
+    Print highscores
+    """
+    clear_screen()
+    highscores_info()
+    col_len = {i: max(map(len, inner))
+               for i, inner in enumerate(zip(*highscores_rounds))}
+
+    for inner in highscores_rounds:
+        for col, word in enumerate(inner):
+            print(f"{word:{col_len[col]}}", end="  >|<  ")
+        print()
+        
+    input("\n\033[1;35;10m  >>>  Press Enter to return to main menu\n")
+    clear_screen()
+
+
 def run_menu(player):
     """
     Runs game Main Menu
@@ -281,6 +334,7 @@ def run_menu(player):
         print(f"\033[1;33;40m  {player.name}, choose option from the list below:\n")
         print("\033[1;35;40m  >>>   Press 1 to >>> Play  Game <<<")
         print("\033[1;35;40m  >>>   Press 2 to >>> View Rules <<<")
+        print("\033[1;35;40m  >>>   Press 3 to >>> View High-Scores <<<")
         print("")
         print("\033[1;35;40m  >>>   Press Q to >>> Quit  Game <<<\n")
         value = input("\033[1;33;40m  >>>  Option: ").upper()
@@ -292,6 +346,9 @@ def run_menu(player):
         elif value == "2":
             clear_screen()
             intructions(player)
+        elif value == "3":
+            clear_screen()
+            display_highscores()
         elif value == "Q":
             clear_screen()
             welcome_screen()
@@ -321,7 +378,6 @@ def main():
     if (balance > 0):
         while True:
             clear_screen()
-            welcome_screen()
             print("\033[1;33;40m "*20 + f"+++  {player.name}, Round: {player.rounds}  +++")
             print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
             print("\033[1;32;40m "*17 + f">>>  Current balance is \
@@ -353,7 +409,10 @@ o Spin <<< (M for MENU)  " + "<"*9).upper()
     progress_bar()
     game_over_info(player)
     time.sleep(2)
-    main()
+    clear_screen()
+    welcome_screen()
+    progress_bar()
+    run_menu(player)
 
 
 # Progress bar function copied from https://stackoverflow.com
@@ -492,6 +551,12 @@ def spin_info(player):
     print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
 
 
+def highscores_info():
+    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
+    print("\033[1;35;10m "*20 + ">>>  Top 10 High-Scores <<<" + " "*20)
+    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
+
+
 def game_over_info(player):
     print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
     print("\033[1;33;40m "*12 + f">>> {player.name} you played {player.rounds} round(s)! <<<")
@@ -499,7 +564,22 @@ def game_over_info(player):
     print("\033[1;31;40m "*24 + ">>> GAME OVER <<<" + " "*25)
     print("\033[1;33;40m "*24 + ">>> Good-Bye! <<<" + " "*25)
     print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-    input("\n\033[1;33;40m  >>>  Press Enter to exit game\n")
+    update_highscores(player)
+    updated_highscores = highscores.get_all_values()
+    highscores_info()
+    col_len = {i: max(map(len, inner))
+    for i, inner in enumerate
+    (zip(*updated_highscores))}
+
+    for inner in updated_highscores:
+        for col, word in enumerate(inner):
+            print(f"\033[1;33;40m{word:{col_len[col]}}", end="  >-|-< ")
+        print()
+    print(f"Thanks for playing {player.name}!")
+    answer = input("\033[1;33;40m  >>>  Press Enter to go to >>> MAIN MENU <<<\
+ (Q to Quit)  <<<    \n").upper()
+    if answer == "Q":
+        quit()
 
 
 main()
