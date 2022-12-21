@@ -40,22 +40,18 @@ symbol_value = {
     "♧": 2
 }
 
-def clear_screen():
-    """
-    Clears the terminal
-    """
-    os.system("cls" if os.name == "nt" else "clear")
-
 
 class Player:
     """
     Player class used to create player
     """
-    def __init__(self, name, place, rounds, balance):
+    def __init__(self, name, place, rounds, balance, wins, win):
         self.name = name
         self.place = place
         self.rounds = 1
         self.balance = DEPOSIT
+        self.wins = 0
+        self.win = 0
 
 
 def player_details():
@@ -73,7 +69,7 @@ def player_details():
 are you from? >>> ").capitalize()
                 if player_place.isalpha():
                     player = Player(name=player_name, place=player_place,
-                                    rounds=1, balance=DEPOSIT)
+                                    rounds=1, balance=DEPOSIT, wins = 0, win = 0)
                     return player
                 else:
                     print(f"\033[1;31;40m  '{player_place}' is not valid")
@@ -280,11 +276,13 @@ def win_check(columns, lines, bet, values, player):
                 break
         else:
             winnings += values[symbol] * bet
+            player.win += values[symbol] * bet
             winning_lines.append(line+1)
+            player.wins += 1
             print()
             print("\n" + "\033[1;33;40m "*15 + f"Congratulations {player.name}! You won!!!")
-            print("\033[1;33;40m*"*66)
-            print(f"\033[1;32;40m  >>>  {player.name}, you have won €{winnings}! on line(s)\
+    print("\033[1;33;40m*"*66)
+    print(f"\033[1;32;40m  >>>  {player.name}, you have won €{winnings}! on line(s)\
 : ", *winning_lines)
     print("\033[1;31;40mx"*66)
     print(f"\033[1;31;40m  >>>  {player.name}, you have lost on line(s): ", *loosing_lines)
@@ -295,16 +293,16 @@ def update_highscores(player):
     """
     updates the highscores
     """
-    for count, score in enumerate(highscores_rounds[1:11], 2):
-        if player.rounds > int(score[2]):
-            print(f"Well done {player.name}, you made the top 10!")
-            player_as_list = [player.name, player.place, player.rounds]
+    for count, rounds in enumerate(highscores_rounds[1:11], 2):
+        if player.rounds > int(rounds[2]):
+            print(f"\033[1;33;40m  >>>  Well done {player.name}, you made the top 10!\n")
+            player_as_list = [player.name, player.place, player.rounds, player.balance, player.wins, player.win]
             highscores.append_row(player_as_list)
-            highscores.sort((3, 'des'), range='A2:C999')
+            highscores.sort((3, 'des'), range='A2:D99')
             highscores.delete_rows(12)
             break
     else:
-        print(f"No can do {player.name}, You didn't make the top 10")
+        print(f"\033[1;31;40m  >>>  No can do {player.name}, You didn't make the top 10\n")
 
 
 def display_highscores():
@@ -313,15 +311,17 @@ def display_highscores():
     """
     clear_screen()
     highscores_info()
+    print("\033[1;33;40m")
     col_len = {i: max(map(len, inner))
                for i, inner in enumerate(zip(*highscores_rounds))}
-
     for inner in highscores_rounds:
         for col, word in enumerate(inner):
-            print(f"{word:{col_len[col]}}", end="  >|<  ")
+            print(f"\033[1;33;40m{word:{col_len[col]}}", end="\033[1;35;40m  >|<  ")
         print()
-        
-    input("\n\033[1;35;10m  >>>  Press Enter to return to main menu\n")
+        print("\033[1;35;40m-"*66)
+
+    print("\n" + "\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    input("\n\033[1;33;40m  >>>  Press Enter to return to main menu\n")
     clear_screen()
 
 
@@ -377,20 +377,20 @@ def main():
     balance = deposit(player)
     if (balance > 0):
         while True:
-            clear_screen()
-            print("\033[1;33;40m "*20 + f"+++  {player.name}, Round: {player.rounds}  +++")
-            print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-            print("\033[1;32;40m "*17 + f">>>  Current balance is \
-€{balance}! <<<" + " "*16)
+            clear_screen()            
             if balance <= 0:
                 game_over_info(player)
                 main()
             else:
+                print("\033[1;33;40m "*20 + f"+++  {player.name}, Round: {player.rounds}  +++")
+                print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+                print("\033[1;32;40m "*17 + f">>>  Current balance is \
+€{balance}! <<<" + " "*16)
                 print("\033[1;34;40m "*23 + ">>>  Let's play! <<<" + " "*23)
                 print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
                 answer = input("\033[1;31;40m>"*13 + "  Press >>> Enter t\
-o Spin <<< (M for MENU)  " + "<"*9).upper()
-                if answer == "M":
+o Spin <<< (E for Exit)  " + "<"*9).upper()
+                if answer == "E":
                     game_over_info(player)
                     time.sleep(2)
                     main()
@@ -413,6 +413,13 @@ o Spin <<< (M for MENU)  " + "<"*9).upper()
     welcome_screen()
     progress_bar()
     run_menu(player)
+
+
+def clear_screen():
+    """
+    Clears the terminal
+    """
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 # Progress bar function copied from https://stackoverflow.com
@@ -552,30 +559,32 @@ def spin_info(player):
 
 
 def highscores_info():
-    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
-    print("\033[1;35;10m "*20 + ">>>  Top 10 High-Scores <<<" + " "*20)
-    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    print("\033[1;35;10m "*20 + ">>>  Top 10 High-Scores <<<" + " "*19)
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
 
 
 def game_over_info(player):
     print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
     print("\033[1;33;40m "*12 + f">>> {player.name} you played {player.rounds} round(s)! <<<")
-    print("\033[1;35;10m "*15 + f">>> Your final balance is €{player.balance} <<<")
-    print("\033[1;31;40m "*24 + ">>> GAME OVER <<<" + " "*25)
-    print("\033[1;33;40m "*24 + ">>> Good-Bye! <<<" + " "*25)
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    print("\033[1;35;10m "*15 + f">>> You won {player.wins} time(s)! <<<")
+    print("\033[1;35;10m "*18 + f">>> Total win of €{player.win}! <<<")
+    print()
     update_highscores(player)
     updated_highscores = highscores.get_all_values()
     highscores_info()
     col_len = {i: max(map(len, inner))
-    for i, inner in enumerate
-    (zip(*updated_highscores))}
+               for i, inner in enumerate(zip(*updated_highscores))}
 
     for inner in updated_highscores:
         for col, word in enumerate(inner):
-            print(f"\033[1;33;40m{word:{col_len[col]}}", end="  >-|-< ")
+            print(f"\033[1;33;40m{word:{col_len[col]}}", end="\033[1;35;40m  >|<  ")
         print()
-    print(f"Thanks for playing {player.name}!")
+    print("\033[1;34;40m>"*34 +"<"*34)
+    print("\033[1;31;40m "*24 + ">>> GAME OVER <<<" + " "*25)
+    print("\033[1;33;40m "*24 + ">>> Good-Bye! <<<" + " "*25)
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    print(f"\n\033[1;35;10m  >>>  Thanks for playing {player.name}!\n")
     answer = input("\033[1;33;40m  >>>  Press Enter to go to >>> MAIN MENU <<<\
  (Q to Quit)  <<<    \n").upper()
     if answer == "Q":
