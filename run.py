@@ -296,9 +296,9 @@ def update_highscores(player):
     for count, rounds in enumerate(highscores_rounds[1:11], 2):
         if player.rounds > int(rounds[2]):
             print(f"\033[1;33;40m  >>>  Well done {player.name}, you made the top 10!\n")
-            player_as_list = [player.name, player.place, player.rounds, player.balance, player.wins, player.win]
+            player_as_list = [player.name, player.place, player.rounds, player.wins, player.win]
             highscores.append_row(player_as_list)
-            highscores.sort((3, 'des'), range='A2:D99')
+            highscores.sort((4, 'des'), range='A2:E99')
             highscores.delete_rows(12)
             break
     else:
@@ -309,8 +309,6 @@ def display_highscores():
     """
     Print highscores
     """
-    clear_screen()
-    highscores_info()
     print("\033[1;33;40m")
     col_len = {i: max(map(len, inner))
                for i, inner in enumerate(zip(*highscores_rounds))}
@@ -318,7 +316,6 @@ def display_highscores():
         for col, word in enumerate(inner):
             print(f"\033[1;33;40m{word:{col_len[col]}}", end="\033[1;35;40m  >|<  ")
         print()
-        print("\033[1;35;40m-"*66)
 
     print("\n" + "\033[1;34;40m>"*27 + " "*11 + "<"*28)
     input("\n\033[1;33;40m  >>>  Press Enter to return to main menu\n")
@@ -348,6 +345,7 @@ def run_menu(player):
             intructions(player)
         elif value == "3":
             clear_screen()
+            highscores_info()
             display_highscores()
         elif value == "Q":
             clear_screen()
@@ -383,6 +381,8 @@ def main():
                 main()
             else:
                 print("\033[1;33;40m "*20 + f"+++  {player.name}, Round: {player.rounds}  +++")
+                print("\033[1;33;40m "*22 + f"+++  You have won {player.wins} round(s)!  +++")
+                print("\033[1;33;40m "*28 + f"+++  Total of €{player.win}  +++")
                 print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
                 print("\033[1;32;40m "*17 + f">>>  Current balance is \
 €{balance}! <<<" + " "*16)
