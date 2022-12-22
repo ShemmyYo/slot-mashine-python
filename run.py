@@ -329,6 +329,7 @@ def run_menu(player):
             intructions(player)
         elif value == "3":
             clear_screen()
+            welcome_screen()
             highscores_info()
             display_highscores()
         elif value == "Q":
@@ -489,12 +490,13 @@ def intructions(player):
  "*19)
     print("\033[1;35;10m  2. When betting on lines you start betting on top \
 line first -1-")
-    print("\033[1;35;10m     middle -2- second and bottom -3- third." + " "*22)
+    print("\033[1;35;10m     middle second -2- and bottom third -3-" + " "*22)
     print("\033[1;35;10m  3. There is: 3 x ♥, 4 x ♦, 6 x ♠ and 7 x ♣ symbols  \
             ")
-    print("\033[1;35;10m  4. Valued at :  ♥ - 5, ♦ - 4, ♠ - 3 and ♣ - 2       \
+    print("\033[1;35;10m  4. Valued at :  ♥ x 5, ♦ x 4, ♠ x 3 and ♣ x 2       \
             ")
     print("\033[1;35;10m  5. Min. bet is €1 and max is €100" + " "*31)
+    print("\033[1;35;10m  6. Up\Down your deposit to change difficulty level")
     print("\033[1;33;40m="*66)
     print(f"\033[1;35;10m  {player.name},")
     print("\033[1;35;10m  all you need is a bag of change and you're ready \

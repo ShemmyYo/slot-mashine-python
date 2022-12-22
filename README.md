@@ -50,19 +50,20 @@ You can view the live, deployed application here: <a href ='https://shemmy-slot-
 - [UX User Experience](#ux-user-experience)
     - [User Stories](#user-stories)
     - [Flowchart](#flowchart)
+    - [Colour Scheme](#colour-scheme)
     - [Class Object](#classobject)
 - [Features](#features)
     - [Existing Features](#existing-features)
         - [Main Menu](#main-menu)
         - [Instructions](#home)
+        - [High-Scores](#highscores)
         - [Deposit Change Option](#deposit)
         - [Setting lines to bet on and bet mount (difficulty level)](#difficulty)
         - [Turn results](#turn-results)
         - [Game Over](#game-over)
-    - [Future Features](#future-features)
-        - [High Scores](#scores)
 - [Technologies Used](#technologies-used)
     - [Imported Libraries and Packages](#libraries-imported)
+    - [Data Model](#data-model)
 - [Testing](#testing)
 - [Deployment](#deployment)
     - [Deploy to Heroku](#deploy-to-heroku)
@@ -70,9 +71,8 @@ You can view the live, deployed application here: <a href ='https://shemmy-slot-
     - [To Fork the Repository](#to-fork-the-repository)
 - [Credits](#credits)
     - [Code](#code)
-    - [Content](#content)
     - [Design](#design)
-- [Acknowledgements](#acknowledgements)
+    - [Acknowledgements](#acknowledgements)
 
 ***
 ## __Project Goals__
@@ -93,15 +93,19 @@ I wish to demonstrate my competency as a Software Developer and showcase Python 
 ### __User Stories__
 
 __As a Player, I wish:__ 
-- to play a simple and fun but still challenging game.
-- to be able to see instructions before the start of the game.
-- to play a game that navigates easyly.
-- to be able to set bet amount.
-- to be able to change game difficulty by changing number of lines I bet on.
-- to be given feedback if I entered invalid data. 
-- to be able to go reset the game.
-- to be able to see current balance.
-- to be encouraged to replay and increase scores.
+
+|     |                                   ACTION                                   |
+| --- | :------------------------------------------------------------------------: |
+| 1   | to play a simple and fun but still challenging game.                       |
+| 2   | to be able to see instructions before the start of the game.               |
+| 3   | to play a game that navigates easyly.                                      |
+| 4   | to be able to set bet amount.                                              |
+| 5   | to be able to change game difficulty by changing number of lines I bet on. |
+| 6   | to be given feedback if I entered invalid data.                            |
+| 7   | to be able to go reset the game.                                           |
+| 8   | to be able to see current balance.                                         |
+| 9   | to be encouraged to replay and increase scores.                            |
+| 10  | to check if user made the top 10 high-scores.                              |
 
 [Back to Content](<#contents>)
 ***
@@ -111,17 +115,30 @@ The below flowchart has been created prior to my code to give me a clear view of
 
 ![Flowchart](/assets/images/flow-chart.png)
 
+### __Color Scheme__
+
+To provide better user experience, I have decided to use color scheme.
+The colors used were from ANSI gamma, as described below:
+
+- Yellow color (\033[1;33;40m)
+- Red color (\033[1;31;40m)
+- Magenta color (\033[1;35;40m)
+- Green color (\033[1;32;40m)
+- Blue color (\033[1;34;40m)
+
 ### __Class Object__
 OOC (Object Oriented Class) has been added in this project to create a Player class.
 I used [Real Python](https://realpython.com/python3-object-oriented-programming/) to create it.
 
 ```python
 class Player:
-    def __init__(self, name, place, rounds, balance):
+    def __init__(self, name, place, rounds, balance, wins, win):
         self.name = name
         self.place = place
         self.rounds = 0
         self.balance = DEPOSIT
+        self.wins = 0
+        self.win = 0
 ```
 
 [Back to top](<#contents>)
@@ -136,7 +153,7 @@ The user is welcomed to the game wtih game logo and prompted to input their deta
 ***
 
 ### __Main Menu__
-Main menu enables the user to start the game, view the game instructions and exit the game.
+Main menu enables the user to start the game, view the game instructions, high-scores and exit the game.
 
 <details open><summary>Main Menu IMAGE</summary>
 
@@ -156,7 +173,18 @@ You can come back to the main menu by hitting the Enter key or quit by hitting Q
 
 ***
 
-### __Deposit Change Option (difficulty level)__
+### __High-Sores__
+Option 3 on main menu displays top 10 High-Scores. 
+You can come back to the main menu by hitting the Enter key.
+
+<details open><summary>High-Scores IMAGE</summary>
+
+![Instructions](assets/images/highscores.png)
+</details>
+
+***
+
+### __Deposit change option (difficulty level)__
 Changing deposit may make the game easier (if set to higher) or more diffcult (if set lower)
 
 <details open><summary>Deposit Change Option IMAGE</summary>
@@ -177,7 +205,7 @@ Users can set the number of lines (1-3) to bet on and bet amount which makes the
 ***
 
 ### __Turn results__
-Reluts are presented in grapicly same way as on a realone-armed bandid.
+Reluts are presented in grapicly on reels (same way as on a real one-armed bandid).
 Each line is analised and results for each line is printed (includin the amount won/lost and number of winning/loosing lines)
 
 <details open><summary>Results IMAGE</summary>
@@ -188,7 +216,7 @@ Each line is analised and results for each line is printed (includin the amount 
 ***
 
 ### __Progress Bar__
-Added for visual enhancment. 
+Added for visual enhancement. 
 
 <details open><summary>Progress Bar IMAGE</summary>
 
@@ -198,7 +226,9 @@ Added for visual enhancment.
 ***
 
 ### __Game Over__
-Showing final result of the game
+Showing final result of the game.
+Final score will be checked against the current 10 highests scores.
+Regardless of whether user gets to top 10 or not, high-scores table is updated and displayed. 
 
 <details open><summary>Game Over IMAGE</summary>
 
@@ -206,15 +236,7 @@ Showing final result of the game
 </details>
 
 [Back to Content](<#contents>)
-***
 
-## __Future Features__
-### __High Scores__
-
-Game high-scores - I plan to add local high-score board so users can see how they compare to other users.
-
-
-[Back to Content](<#contents>)
 ***
 ## __Technologies Used__
 
@@ -238,15 +260,57 @@ Game high-scores - I plan to add local high-score board so users can see how the
 - [random](https://docs.python.org/3/library/random.html) was used to select symbols for reels
 - [os](https://docs.python.org/3/library/os.html) was used to create the clear_screen function to enhance user experience and reduce clutter on screen
 - [time](https://docs.python.org/3/library/time.html) used time.sleep to enhance user experience and to pause
+- [gspread](https://docs.gspread.org/en/v5.7.0/) for linking Google Sheets to read and update high-scores table.
+- [Google Auth](https://google-auth.readthedocs.io/en/master/) to access Google Sheets
+***
+- [colorama](https://pypi.org/project/colorama/) allows terminal text to be printed in different colors
 
 [Back to Content](<#contents>)
+
+***
+
+### __Data Model___
+
+I used Google Sheets to store high-scores data. 
+
+![Google Sheets](assets/images/googlesheets.png)
+
 ***
 
 ## __Testing__
-### __test___
+### __PEP8 CI Validation__
+
+Online validation tool (provided by CI) was used to check that the code is up to standard.
+All validated with no errors.
+
+[PEP8CI](https://pep8ci.herokuapp.com/) 
+
+![PEP8 CI Validation](assets/images/pep8.png)
+
+### __Tests based on user stories:__
+
+|     |                                   ACTION                     | Requirement met |
+| --- | :----------------------------------------------------------: | :-------------: |
+| 1   | to play a simple and fun but still challenging game.         | Yes             |
+| 2   | to be able to see instructions before the start of the game. | Yes             |
+| 3   | to play a game that navigates easyly.                        | Yes             |
+| 4   | to be able to set bet amount.                                | Yes             |
+| 5   | to be able to change game difficulty by changing number of lines I bet on.                                                                  | Yes             |
+| 6   | to be given feedback if I entered invalid data.              | Yes             |
+| 7   | to be able to go reset the game.                             | Yes             |
+| 8   | to be able to see current balance.                           | Yes             |
+| 9   | to be encouraged to replay and increase scores.              | Yes             |
+| 10  | to check if user made the top 10 high-scores.                | Yes             |
+
+***
+
+__Manual tests:__
+- Verified ....................
 
 [Back to Content](<#contents>)
+
 ***
+
 ## __Deployment__
 ### __Deploy to Heroku__
 
@@ -276,16 +340,16 @@ For Heroku deployment, follow these steps to connect your GitHub repository to t
 
 The frontend terminal should now be connected and deployed to Heroku.
 
-[Back to Content](<#contents>)
 ***
+
 ### __Local Deployment__
 
 To make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
 
 - `git clone https://github.com/shemmyyo/slot-mashine-python.git`
 
-[Back to Content](<#contents>)
 ***
+
 ### __To Fork the Repository__
 
 To make a copy or ‘fork’ the repository - 
@@ -296,31 +360,48 @@ To make a copy or ‘fork’ the repository -
 Alternatively, if using Gitpod, you can click below to create your workspace using this repository
 
 [Back to Content](<#contents>)
+
 ***
+
 ## __Credits__
 
-Throughout the building process I found many helpful tutorials online.
+- Throughout the building process I found many helpful tutorials online.
 I sometimes applied principles within them to the site, after fully understanding their code and modifying to fit the site's needs.
 
-[Back to Content](<#contents>)
+- Heroku deployment instructions from Code Institute
+GitHub Python Template [Code Institute](https://codeinstitute.net/)
+
 ### __Code__
 
+- Tutorial that helped me figure out the logic for the game [Tech With Tim](https://www.youtube.com/watch?v=th4OBktqK1I)
+
 - Code to create clear_screen function taken from [GeeksforGeeks](https://www.geeksforgeeks.org/clear-screen-python/)
-***
-### __Content__
-***
+
+- Inspiration and code for progress bar [StackOverflow](https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters/13685020)
+
+- random library [Docs Python](https://docs.python.org/3/library/random.html)
+
+- os library [Docs Python](https://docs.python.org/3/library/os.path.html)
+
+- datetime library [Docs Python](https://docs.python.org/3/library/datetime.html)
+
 ### __Design__
 
-- Flowchart was made using 
+- Flowchart was made using [MindManager](https://app.mindmanager.com/)
 
-[Back to Content](<#contents>)
-***
-## __Acknowledgements__
+- Inspiration for gradient HTML/CSS background [Aurora UI](https://dev.to/albertwalicki/aurora-ui-how-to-create-with-css-4b6g) 
+
+
+### __Acknowledgements__
 
 As always, big thank you to [Harry Dhillon](https://github.com/Harry-Leepz), my mentor who provided me with guide and excellent feedback throughout the project
 
+***
+
 One-Armed Bandit! was developed for educational purpouses and as part of my Diploma in Software Development with [Code Institute](https://codeinstitute.net/). 
 
+
 Shemmy, 2022
+
 
 [Back to top](<#project-portfolio-3---python>)
