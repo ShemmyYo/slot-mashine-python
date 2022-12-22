@@ -24,7 +24,7 @@ If a user loses the whole balance, the game is over and users are brought back t
 You can view the live, deployed application here: <a href ='https://shemmy-slot-mashine.herokuapp.com/' target="_blank">One-Armed Bandit!</a>
 
 
-![One-Armed Bandit! image](assets/images/slot-mashine-screen.png)
+![One-Armed Bandit! image](assets/images/am-i-responsive.png)
 
 ## __Live Web-Page__
 [One-Armed Bandit!](https://shemmy-slot-mashine.herokuapp.com/)
@@ -148,14 +148,19 @@ class Player:
 ### __Welcome Screen__
 The user is welcomed to the game wtih game logo and prompted to input their details.
 
-![Welcome Screen](assets/images/welcome-name.png)
+![Welcome screen image](assets/images/slot-mashine-screen.png)
+
+<details><summary>Player Info IMAGE</summary>
+
+![Player Info](assets/images/player-info.png)
+</details>
 
 ***
 
 ### __Main Menu__
 Main menu enables the user to start the game, view the game instructions, high-scores and exit the game.
 
-<details open><summary>Main Menu IMAGE</summary>
+<details><summary>Main Menu IMAGE</summary>
 
 ![Main Menu](assets/images/main-menu.png)
 </details>
@@ -166,7 +171,7 @@ Main menu enables the user to start the game, view the game instructions, high-s
 Option 2 on main menu displays game instructions. 
 You can come back to the main menu by hitting the Enter key or quit by hitting Q key.
 
-<details open><summary>Instructions IMAGE</summary>
+<details><summary>Instructions IMAGE</summary>
 
 ![Instructions](assets/images/instructions.png)
 </details>
@@ -177,9 +182,9 @@ You can come back to the main menu by hitting the Enter key or quit by hitting Q
 Option 3 on main menu displays top 10 High-Scores. 
 You can come back to the main menu by hitting the Enter key.
 
-<details open><summary>High-Scores IMAGE</summary>
+<details><summary>High-Scores IMAGE</summary>
 
-![Instructions](assets/images/highscores.png)
+![Instructions](assets/images/high-scores.png)
 </details>
 
 ***
@@ -187,7 +192,7 @@ You can come back to the main menu by hitting the Enter key.
 ### __Deposit change option (difficulty level)__
 Changing deposit may make the game easier (if set to higher) or more diffcult (if set lower)
 
-<details open><summary>Deposit Change Option IMAGE</summary>
+<details><summary>Deposit Change Option IMAGE</summary>
 
 ![Deposit Change Option](assets/images/deposit.png)
 </details>
@@ -197,7 +202,7 @@ Changing deposit may make the game easier (if set to higher) or more diffcult (i
 ### __Setting lines to bet on and bet mount (difficulty level)__
 Users can set the number of lines (1-3) to bet on and bet amount which makes the game easier (if set to 3 lines) or more diffcult (if set 1 lines)
 
-<details open><summary>Setting lines and bet IMAGE</summary>
+<details><summary>Setting lines and bet IMAGE</summary>
 
 ![Setting lines and bet](assets/images/lines-bet.png)
 </details>
@@ -208,7 +213,7 @@ Users can set the number of lines (1-3) to bet on and bet amount which makes the
 Reluts are presented in grapicly on reels (same way as on a real one-armed bandid).
 Each line is analised and results for each line is printed (includin the amount won/lost and number of winning/loosing lines)
 
-<details open><summary>Results IMAGE</summary>
+<details><summary>Results IMAGE</summary>
 
 ![Results](assets/images/turn-results.png)
 </details>
@@ -218,7 +223,7 @@ Each line is analised and results for each line is printed (includin the amount 
 ### __Progress Bar__
 Added for visual enhancement. 
 
-<details open><summary>Progress Bar IMAGE</summary>
+<details><summary>Progress Bar IMAGE</summary>
 
 ![Progress Bar](assets/images/progress-bar.png)
 </details>
@@ -230,7 +235,7 @@ Showing final result of the game.
 Final score will be checked against the current 10 highests scores.
 Regardless of whether user gets to top 10 or not, high-scores table is updated and displayed. 
 
-<details open><summary>Game Over IMAGE</summary>
+<details><summary>Game Over IMAGE</summary>
 
 ![Game Over](assets/images/game-over.png)
 </details>
@@ -273,7 +278,7 @@ Regardless of whether user gets to top 10 or not, high-scores table is updated a
 
 I used Google Sheets to store high-scores data. 
 
-![Google Sheets](assets/images/googlesheets.png)
+![Google Sheets](assets/images/google-sheets.png)
 
 ***
 
@@ -295,7 +300,7 @@ All validated with no errors.
 | 2   | to be able to see instructions before the start of the game. | Yes             |
 | 3   | to play a game that navigates easyly.                        | Yes             |
 | 4   | to be able to set bet amount.                                | Yes             |
-| 5   | to be able to change game difficulty by changing number of lines I bet on.                                                                  | Yes             |
+| 5   | to be able to change game difficulty by changing number of lines I bet on.  | Yes             |
 | 6   | to be given feedback if I entered invalid data.              | Yes             |
 | 7   | to be able to go reset the game.                             | Yes             |
 | 8   | to be able to see current balance.                           | Yes             |
