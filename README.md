@@ -7,10 +7,10 @@
 It is a Python terminal game, deployed on Heroku using Code Institute's mock terminal to run.
 This project has been designed for educational purposes 
 
-Users are welcomed by the main menu where they enter name and city before being brought to the main menu where they can choose option 1 to start the game or option 2 to view instructions (Q to Quit). 
+Users are welcomed by the main menu where they enter their name and city before being brought to the main menu where they can choose option 1 to start the game or option 2 to view instructions (Q to Quit). 
 
-After choosing to start the game they are type in their name and city .
-Users are given the option to start with a default balance of €100 or change it to pre-defined amount or set it manually hence change difficulty level.
+After choosing to start the game they type in their name and city.
+Users are given the option to start with a default balance of €100 or change it to the pre-defined amount or set it manually hence changing difficulty level.
 
 Next, users are asked to choose the number of lines they wish to bet on (1-3). The more lines the bigger chance of winning, however, the user bet is then multiplied by the number of lines the user wishes to bet on and deducted from the total balance. Once, users choose the number of lines to bet on, this information is confirmed and printed back to the screen. 
 
@@ -65,6 +65,10 @@ You can view the live, deployed application here: <a href ='https://shemmy-slot-
     - [Imported Libraries and Packages](#libraries-imported)
     - [Data Model](#data-model)
 - [Testing](#testing)
+    - [PEP8 CI Validation](#pep8-ci-validation)
+    - [Tests based on user stories](#tests-based-on-user-stories)
+    - [Manual tests](#manual-tests)
+    - [Browser Compatibility](#browser-compatibility)
 - [Deployment](#deployment)
     - [Deploy to Heroku](#deploy-to-heroku)
     - [Local Deployment](#local-deployment)
@@ -77,9 +81,9 @@ You can view the live, deployed application here: <a href ='https://shemmy-slot-
 ***
 ## __Project Goals__
 
-The project goal was to create a user-friendly game and deliver an easy and satisfiying command line interface directory.
+The project goal was to create a user-friendly game and deliver an easy and satisfying command line interface directory.
 
-The project has been built by using Python.
+The project has been built using Python.
 
 [Back to Content](<#contents>)
 ***
@@ -98,27 +102,27 @@ __As a Player, I wish:__
 | --- | :------------------------------------------------------------------------: |
 | 1   | to play a simple and fun but still challenging game.                       |
 | 2   | to be able to see instructions before the start of the game.               |
-| 3   | to play a game that navigates easyly.                                      |
+| 3   | to play a game that navigates easily.                                      |
 | 4   | to be able to set bet amount.                                              |
-| 5   | to be able to change game difficulty by changing number of lines I bet on. |
+| 5   | to be able to change the game difficulty by changing the number of lines I bet on. |
 | 6   | to be given feedback if I entered invalid data.                            |
 | 7   | to be able to go reset the game.                                           |
-| 8   | to be able to see current balance.                                         |
+| 8   | to be able to see the current balance.                                         |
 | 9   | to be encouraged to replay and increase scores.                            |
-| 10  | to check if user made the top 10 high-scores.                              |
+| 10  | to check if the user made the top 10 high scores.                              |
 
 [Back to Content](<#contents>)
 ***
 ### __Flowchart__
 
-The below flowchart has been created prior to my code to give me a clear view of what needed to be implemented. It clearly indicates the layout and structure of the program including where the user needs to be asked for input, where the computer validates the input and how to handle invalid inputs, where the program should subtract and add to the user's balance.
+The below flowchart has been created before my code to give me a clear view of what needed to be implemented. It indicates the layout and structure of the program including where the user needs to be asked for input, where the computer validates the input and how to handle invalid inputs, and where the program should subtract and add to the user's balance.
 
 ![Flowchart](/assets/images/flow-chart.png)
 
 ### __Color Scheme__
 
-To provide better user experience, I have decided to use color scheme.
-The colors used were from ANSI gamma, as described below:
+To provide a better user experience, I have decided to use a color scheme.
+The colours used were from ANSI gamma, as described below:
 
 - Yellow color (\033[1;33;40m)
 - Red color (\033[1;31;40m)
@@ -142,11 +146,12 @@ class Player:
 ```
 
 [Back to top](<#contents>)
+
 ***
 
 ## __Features__
 ### __Welcome Screen__
-The user is welcomed to the game wtih game logo and prompted to input their details.
+The user is welcomed to the game with the game logo and prompted to input their details.
 
 ![Welcome screen image](assets/images/slot-mashine-screen.png)
 
@@ -158,7 +163,7 @@ The user is welcomed to the game wtih game logo and prompted to input their deta
 ***
 
 ### __Main Menu__
-Main menu enables the user to start the game, view the game instructions, high-scores and exit the game.
+The main menu enables the user to start the game, view the game instructions, high-scores and exit the game.
 
 <details><summary>Main Menu IMAGE</summary>
 
@@ -168,8 +173,8 @@ Main menu enables the user to start the game, view the game instructions, high-s
 ***
 
 ### __Instructions__
-Option 2 on main menu displays game instructions. 
-You can come back to the main menu by hitting the Enter key or quit by hitting Q key.
+Option 2 on the main menu displays game instructions. 
+You can come back to the main menu by hitting the Enter key or quit by hitting the Q key.
 
 <details><summary>Instructions IMAGE</summary>
 
@@ -179,7 +184,7 @@ You can come back to the main menu by hitting the Enter key or quit by hitting Q
 ***
 
 ### __High-Sores__
-Option 3 on main menu displays top 10 High-Scores. 
+Option 3 on the main menu displays the top 10 High-Scores. 
 You can come back to the main menu by hitting the Enter key.
 
 <details><summary>High-Scores IMAGE</summary>
@@ -190,7 +195,7 @@ You can come back to the main menu by hitting the Enter key.
 ***
 
 ### __Deposit change option (difficulty level)__
-Changing deposit may make the game easier (if set to higher) or more diffcult (if set lower)
+Changing deposit may make the game easier (if set to higher) or more difficult (if set lower)
 
 <details><summary>Deposit Change Option IMAGE</summary>
 
@@ -200,7 +205,7 @@ Changing deposit may make the game easier (if set to higher) or more diffcult (i
 ***
 
 ### __Setting lines to bet on and bet mount (difficulty level)__
-Users can set the number of lines (1-3) to bet on and bet amount which makes the game easier (if set to 3 lines) or more diffcult (if set 1 lines)
+Users can set the number of lines (1-3) to bet on and bet amount which makes the game easier (if set to 3 lines) or more difficult (if set 1 lines)
 
 <details><summary>Setting lines and bet IMAGE</summary>
 
@@ -210,8 +215,8 @@ Users can set the number of lines (1-3) to bet on and bet amount which makes the
 ***
 
 ### __Turn results__
-Reluts are presented in grapicly on reels (same way as on a real one-armed bandid).
-Each line is analised and results for each line is printed (includin the amount won/lost and number of winning/loosing lines)
+Results are presented graphically on reels (the same way as on a real one-armed bandit).
+Each line is analysed and results for each line is printed (including the amount won/lost and the number of winning/losing lines)
 
 <details><summary>Results IMAGE</summary>
 
@@ -231,9 +236,9 @@ Added for visual enhancement.
 ***
 
 ### __Game Over__
-Showing final result of the game.
-Final score will be checked against the current 10 highests scores.
-Regardless of whether user gets to top 10 or not, high-scores table is updated and displayed. 
+Showing the final result of the game.
+The final score will be checked against the current 10 highest scores.
+Regardless of whether the user gets to the top 10 or not, the high-scores table is updated and displayed. 
 
 <details><summary>Game Over IMAGE</summary>
 
@@ -243,6 +248,7 @@ Regardless of whether user gets to top 10 or not, high-scores table is updated a
 [Back to Content](<#contents>)
 
 ***
+
 ## __Technologies Used__
 
 - [Python](https://www.python.org/) - To provide the functionality to the program
@@ -252,6 +258,7 @@ Regardless of whether user gets to top 10 or not, high-scores table is updated a
 - [MindManager](https://app.mindmanager.com/) - for Flowcharts
 - [Aurora Gradient Animation](https://dev.to/albertwalicki/aurora-ui-how-to-create-with-css-4b6g) - created Aurora gradient background for website
 - [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/) - used extensively to experiment with grid, flexbox and general responsiveness
+- [VSCode] - Used to create, edit and compile the code for the program
 - [Gitpod](https://www.gitpod.io/) - used to create and host the website
 - [Github](https://github.com/) - used to deploy the website 
 - [Git](https://git-scm.com/) - used for version control through the Gitpod terminal
@@ -265,52 +272,133 @@ Regardless of whether user gets to top 10 or not, high-scores table is updated a
 - [random](https://docs.python.org/3/library/random.html) was used to select symbols for reels
 - [os](https://docs.python.org/3/library/os.html) was used to create the clear_screen function to enhance user experience and reduce clutter on screen
 - [time](https://docs.python.org/3/library/time.html) used time.sleep to enhance user experience and to pause
-- [gspread](https://docs.gspread.org/en/v5.7.0/) for linking Google Sheets to read and update high-scores table.
+- [gspread](https://docs.gspread.org/en/v5.7.0/) for linking Google Sheets to read and update the high-scores table.
 - [Google Auth](https://google-auth.readthedocs.io/en/master/) to access Google Sheets
-***
-- [colorama](https://pypi.org/project/colorama/) allows terminal text to be printed in different colors
-
-[Back to Content](<#contents>)
 
 ***
 
-### __Data Model___
+### __Data Model__
 
 I used Google Sheets to store high-scores data. 
 
 ![Google Sheets](assets/images/google-sheets.png)
+
+[Back to Content](<#contents>)
 
 ***
 
 ## __Testing__
 ### __PEP8 CI Validation__
 
-Online validation tool (provided by CI) was used to check that the code is up to standard.
-All validated with no errors.
+An online validation tool (provided by CI) was used to check that the code is up to standard.
+All were validated with no errors.
 
 [PEP8CI](https://pep8ci.herokuapp.com/) 
 
 ![PEP8 CI Validation](assets/images/pep8.png)
 
-### __Tests based on user stories:__
+### __Tests based on user stories__
 
 |     |                                   ACTION                     | Requirement met |
 | --- | :----------------------------------------------------------: | :-------------: |
 | 1   | to play a simple and fun but still challenging game.         | Yes             |
 | 2   | to be able to see instructions before the start of the game. | Yes             |
-| 3   | to play a game that navigates easyly.                        | Yes             |
+| 3   | to play a game that navigates easily.                        | Yes             |
 | 4   | to be able to set bet amount.                                | Yes             |
-| 5   | to be able to change game difficulty by changing number of lines I bet on.  | Yes             |
-| 6   | to be given feedback if I entered invalid data.              | Yes             |
-| 7   | to be able to go reset the game.                             | Yes             |
-| 8   | to be able to see current balance.                           | Yes             |
-| 9   | to be encouraged to replay and increase scores.              | Yes             |
-| 10  | to check if user made the top 10 high-scores.                | Yes             |
+| 5   | to be able to set difficulty level by setting deposit level  | Yes             |
+| 6   | to be able to change the game difficulty by changing the number of lines I bet on.  | Yes             |
+| 7   | to be given feedback if I entered invalid data.              | Yes             |
+| 8   | to be able to go reset the game.                             | Yes             |
+| 9   | to be able to see the current balance.                       | Yes             |
+| 10  | to be encouraged to replay and increase scores.              | Yes             |
+| 11  | to check if the user made the top 10 high-scores.            | Yes             |
 
 ***
 
-__Manual tests:__
-- Verified ....................
+### __Manual tests:__
+
+<details><summary>Click to display manual tests</summary>
+
+#### Welcome Screen
+    - Welcome screen has loaded correctly and as intended.
+    - Verified that the user can submit the Player name and city.
+    - Input is verified and only letters are accepted.
+
+![Player name validation](assets/images/error-player-name.png)
+![Player city validation](assets/images/error-player-city.png)
+
+#### Main Menu
+    - Main Menu has loaded correctly and as intended addressing the user with its Player name.
+    - Verified that when 1 is pressed, the game starts and displays the next function (Set Deposit).
+    - Verified that when 2 is pressed, they are taken to the Instructions.
+    - Verified that when 3 is pressed, they are taken to the High-Scores.
+    - Verified that when Q is pressed, the program ends.
+    - Input is verified and only 1, 2, 3 and Q are accepted.
+    - That each number takes the user to the correct menu option.
+
+#### Play Game - deposit setting (option 1)
+    - Deposit setting screen has loaded correctly and as intended.
+    - Verified that the user is welcomed by its Player name. 
+    - Verified that the Player is invited to change the start deposit (difficulty level).
+    - Verified that when C is pressed, the Player is asked to choose a difficulty level (1 to 3).
+    - Verified that when 1 is pressed, the deposit is set to €50 (hard level).
+    - Verified that when 2 is pressed, the deposit is set to €100 (normal level).
+    - Verified that when 3 is pressed, the deposit is set to €200 (easy level).
+    - Input is verified and only 1, 2 or 3 are accepted.
+
+![Deposit Validation](assets/images/error-deposit.png)
+
+    - Verified that when Enter is pressed, the default deposit is accepted.
+    - Verified that once deposit/difficulty level is accepted, info is printed to the game screen 
+    - Verified that by pressing Enter when notified, the program 'spins reels'.
+    - Verified that pressing E when notified, exits the game, and prints out final totals.
+
+#### Game Round - No of lines / Bet per line / Spin Reels
+    - The game screen has loaded correctly and as intended.
+    - Verified that the Player can only choose between lines 1 to 3
+![Number of lines validated](assets/images/error-lines.png)
+    
+    
+    - Verified that no other input than 1, 2, or 3 is accepted and the program provides info if incorrect input is entered.
+    - Verified that the Player can only bet between €1 to €100 and the bet can be covered by the deposit.
+![Balance check against total bet](assets/images/error-balance.png)
+
+    
+    - Verified that no other input than €1 to €100 is accepted and the program provides info if incorrect input is entered.
+![Bet validated](assets/images/error-bet.png)
+    
+    
+    - Verified that total bet per line info is displayed correctly to the Player.
+    - Verified that Reels loaded to the screen correctly and as intended showing symbols in lines.
+    - Verified that wins/loses are shown correctly to the Player 
+    - Verified that any wind/losses are added/subtracted to/from the balance.
+    - Verified that by pressing Enter when notified, the program 'spins reels' again or displays the final balance and information.
+
+#### Game Over / High-Scores
+    - Game Over screen has loaded correctly and as intended.
+    - Verified that number of played rounds, the number of rounds won and wins are calculated properly.
+    - Verified that total score is checked against the top 10 and if high enough, name and other details are correctly added to Hight-Score table.
+    - High-Scores have loaded correctly and as intended.
+    - Verified that when Enter is pressed, the user is redirected to Main Menu.
+    - Verified that when Q is pressed, the program ends.
+
+#### Instructions (option 2)
+    - Instructions have loaded correctly and as intended.
+    - Verified that when Enter is pressed, the user is redirected to Main Menu.
+    - Verified that when Q is pressed, the program ends.
+
+#### High-Scores (option3)
+    - High-Scores have loaded correctly and as intended.
+    - Verified that when Enter is pressed, the user is redirected to Main Menu.
+
+</details>
+
+***
+
+### __Browser Compatibility__
+
+After publishing tto Heroku, the site was tested on Google Chrome, Microsoft Edge, Safari and Mozilla Firefox, with no visible issues for the user. 
+The site has loaded perfectly and had no issues across all browsers.
 
 [Back to Content](<#contents>)
 
