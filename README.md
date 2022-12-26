@@ -54,6 +54,7 @@ You can view the live, deployed application here: <a href ='https://shemmy-slot-
     - [Class Object](#classobject)
 - [Features](#features)
     - [Existing Features](#existing-features)
+        - [Player Info](#player-info)
         - [Main Menu](#main-menu)
         - [Instructions](#home)
         - [High-Scores](#highscores)
@@ -104,12 +105,13 @@ __As a Player, I wish:__
 | 2   | to be able to see instructions before the start of the game.               |
 | 3   | to play a game that navigates easily.                                      |
 | 4   | to be able to set bet amount.                                              |
-| 5   | to be able to change the game difficulty by changing the number of lines I bet on. |
-| 6   | to be given feedback if I entered invalid data.                            |
-| 7   | to be able to go reset the game.                                           |
-| 8   | to be able to see the current balance.                                         |
-| 9   | to be encouraged to replay and increase scores.                            |
-| 10  | to check if the user made the top 10 high scores.                              |
+| 5   | to be able to set difficulty level by setting deposit level                |
+| 6   | to be able to change the game difficulty by changing the number of lines I bet on. |
+| 7   | to be given feedback if I entered invalid data.                            |
+| 8   | to be able to go reset the game.                                           |
+| 9   | to be able to see the current balance.                                     |
+| 10  | to be encouraged to replay and increase scores.                            |
+| 11  | to check if the user made the top 10 high scores.                          |
 
 [Back to Content](<#contents>)
 ***
@@ -139,10 +141,10 @@ class Player:
     def __init__(self, name, place, rounds, balance, wins, win):
         self.name = name
         self.place = place
-        self.rounds = 0
+        self.rounds = rounds
         self.balance = DEPOSIT
-        self.wins = 0
-        self.win = 0
+        self.wins = wins
+        self.win = win
 ```
 
 [Back to top](<#contents>)
@@ -151,9 +153,14 @@ class Player:
 
 ## __Features__
 ### __Welcome Screen__
-The user is welcomed to the game with the game logo and prompted to input their details.
+The user is welcomed to the game with the game logo.
 
 ![Welcome screen image](assets/images/slot-mashine-screen.png)
+
+***
+
+### __Player Info__
+The user is prompted to input their details.
 
 <details><summary>Player Info IMAGE</summary>
 
@@ -226,7 +233,7 @@ Each line is analysed and results for each line is printed (including the amount
 ***
 
 ### __Progress Bar__
-Added for visual enhancement. 
+Added for visual enhancement - Inspiration and code for loading bar [StackOverflow](https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters/13685020)
 
 <details><summary>Progress Bar IMAGE</summary>
 
@@ -258,14 +265,13 @@ Regardless of whether the user gets to the top 10 or not, the high-scores table 
 - [MindManager](https://app.mindmanager.com/) - for Flowcharts
 - [Aurora Gradient Animation](https://dev.to/albertwalicki/aurora-ui-how-to-create-with-css-4b6g) - created Aurora gradient background for website
 - [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/) - used extensively to experiment with grid, flexbox and general responsiveness
-- [VSCode] - Used to create, edit and compile the code for the program
+- [VSCode](https://code.visualstudio.com/) - Used to create, edit and compile the code for the program
 - [Gitpod](https://www.gitpod.io/) - used to create and host the website
 - [Github](https://github.com/) - used to deploy the website 
 - [Git](https://git-scm.com/) - used for version control through the Gitpod terminal
-- [Am I Responsive](https://ui.dev/amiresponsive) - to create an image displaying the home page on various devices 
+- [Technisini](https://techsini.com/multi-mockup/index.php) - to create an image displaying the home page on various devices 
 - [Grammarly](https://app.grammarly.com/) - to make writing clear and engaging as well as eliminate grammar errors
-- [CI Python Linter](https://pep8ci.herokuapp.com/)
-- [PyInputPlus](https://pypi.org/project/PyInputPlus/) - used to validate user inputs
+- [CI Python Linter](https://pep8ci.herokuapp.com/) - testing code with CI Python Linter
 
 ### __Imported Libraries and Packages__
 
@@ -397,7 +403,7 @@ All were validated with no errors.
 
 ### __Browser Compatibility__
 
-After publishing tto Heroku, the site was tested on Google Chrome, Microsoft Edge, Safari and Mozilla Firefox, with no visible issues for the user. 
+After publishing to Heroku, the site was tested on Google Chrome, Microsoft Edge, Safari and Mozilla Firefox, with no visible issues for the user. 
 The site has loaded perfectly and had no issues across all browsers.
 
 [Back to Content](<#contents>)
@@ -472,11 +478,11 @@ GitHub Python Template [Code Institute](https://codeinstitute.net/)
 
 - Inspiration and code for progress bar [StackOverflow](https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters/13685020)
 
-- random library [Docs Python](https://docs.python.org/3/library/random.html)
+- random library used to generate symbols for the reels [Docs Python](https://docs.python.org/3/library/random.html)
 
-- os library [Docs Python](https://docs.python.org/3/library/os.path.html)
+- os library used to clear screen  [Docs Python](https://docs.python.org/3/library/os.path.html)
 
-- datetime library [Docs Python](https://docs.python.org/3/library/datetime.html)
+- datetime library used to pause 'time.sleep()' [Docs Python](https://docs.python.org/3/library/datetime.html)
 
 ### __Design__
 

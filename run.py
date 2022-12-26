@@ -51,10 +51,10 @@ class Player:
     def __init__(self, name, place, rounds, balance, wins, win):
         self.name = name
         self.place = place
-        self.rounds = 1
+        self.rounds = rounds
         self.balance = DEPOSIT
-        self.wins = 0
-        self.win = 0
+        self.wins = wins
+        self.win = win
 
 
 def player_details():
@@ -68,14 +68,14 @@ def player_details():
         if player_name.isalpha():
             place = False
             while not place:
-                player_place = input("\033[1;33;40m  >>>  Which city \
+                player_city = input("\033[1;33;40m  >>>  Which city \
 are you from? >>> ").capitalize()
-                if player_place.isalpha():
-                    player = Player(name=player_name, place=player_place,
+                if player_city.isalpha():
+                    player = Player(name=player_name, place=player_city,
                                     rounds=1, balance=DEPOSIT, wins=0, win=0)
                     return player
                 else:
-                    print(f"\033[1;31;40m  '{player_place}' is not valid")
+                    print(f"\033[1;31;40m  '{player_city}' is not valid")
                     print("\033[1;31;40m  !!!  Only letters please")
         else:
             print(f"\n\033[1;31;40m  '{player_name}' is not valid")
@@ -292,7 +292,7 @@ the top 10!\n")
             player_as_list = [player.name, player.place, player.rounds,
                               player.wins, player.win]
             highscores.append_row(player_as_list)
-            highscores.sort((4, 'des'), range='A2:E99')
+            highscores.sort((5, 'des'), range='A2:E99')
             highscores.delete_rows(12)
             break
     else:
@@ -420,40 +420,43 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 
-# Progress bar function copied from https://stackoverflow.com
+
 def progress_bar():
-    # A List of Items need to print progress bar
+    """
+    Progress bar function copied from https://stackoverflow.com
+    A List of Items need to print progress bar
+    Initial call to print 0% progress
+    Update Progress Bar
+    """
     items = list(range(0, 57))
     lengh = len(items)
-    # Initial call to print 0% progress
     print_progress_bar(0, lengh, prefix='\033[1;33;40mLoading: ', suffix='\
 Complete', length=38)
     for i, item in enumerate(items):
         # Do stuff...
         time.sleep(0.005)
-        # Update Progress Bar
-        print_progress_bar(i + 1, lengh, prefix='Progress:', suffix='Complete\
+        print_progress_bar(i + 1, lengh, prefix='Loading:', suffix='Complete\
 ', length=38)
 
 
-# Print iterations progress copied from https://stackoverflow.com
 def print_progress_bar(iteration, total, prefix='', suffix='\
 ', decimals=1, length=100, fill='█', print_end="\r"):
     """
     Call in a loop to create terminal progress bar
     by https://stackoverflow.com
+    Print iterations progress 
+    Print New Line on Complete
     """
     percent = ("{0:." + str(decimals) + "f}\
 ").format(100 * (iteration / float(total)))
     filled_length = int(length * iteration // total)
     barr = fill * filled_length + '-' * (length - filled_length)
     print(f'\r{prefix} |{barr}| {percent}% {suffix}', end=print_end)
-    # Print New Line on Complete
     if iteration == total:
         print()
 
 
-# all messages displayed on screen listed below:
+# messages displayed on screen listed below:
 def welcome_screen():
     clear_screen()
     print("\033[1;33;40m*"*66)
@@ -488,6 +491,9 @@ def welcome_screen():
 
 
 def intructions(player):
+    """
+    instructions printed when option 2 pressed from main menu
+    """
     welcome_screen()
     print("\033[1;34;40m>"*25 + " "*14 + "<"*27)
     print("\033[1;35;10m "*22 + ">>> Instructions <<<" + " "*24)
@@ -520,50 +526,10 @@ to go!         ")
         quit()
 
 
-def run_menu_info():
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-    print("\033[1;35;10m "*24 + ">>> MAIN MENU <<<" + " "*25)
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-
-
-def player_info():
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-    print("\033[1;35;10m "*23 + ">>> Player Info <<<" + " "*24)
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-
-
-def deposit_info():
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-    print("\033[1;35;10m "*24 + ">>>  Deposit  <<<" + " "*25)
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-
-
-def get_number_of_lines_info():
-    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
-    print("\033[1;35;10m "*22 + ">>>  No of Lines  <<<" + " "*23)
-    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
-
-
-def get_bet_info():
-    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
-    print("\033[1;35;10m "*22 + ">>>  Bet per Line  <<<" + " "*22)
-    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
-
-
-def spin_info(player):
-    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
-    print("\033[1;35;10m "*20 + f">>>  Turn {player.rounds} Results  \
-<<<" + " "*20)
-    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
-
-
-def highscores_info():
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-    print("\033[1;35;10m "*20 + ">>>  Top 10 High-Scores <<<" + " "*19)
-    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
-
-
 def game_over_info(player):
+    """
+    game over printed what the end of the game or when user quits
+    """
     print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
     print("\033[1;33;40m "*12 + f">>> {player.name} you played \
 {player.rounds} round(s)! <<<")
@@ -590,6 +556,70 @@ def game_over_info(player):
  (Q to Quit)  <<<    \n").upper()
     if answer == "Q":
         quit()
+
+
+def run_menu_info():
+    """
+    message printed by calling main menu
+    """
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    print("\033[1;35;10m "*24 + ">>> MAIN MENU <<<" + " "*25)
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+
+
+def player_info():
+    """
+    message printed by calling function 
+    """
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    print("\033[1;35;10m "*23 + ">>> Player Info <<<" + " "*24)
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+
+
+def deposit_info():
+    """
+    message printed by calling function 
+    """
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    print("\033[1;35;10m "*24 + ">>>  Deposit  <<<" + " "*25)
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+
+
+def get_number_of_lines_info():
+    """
+    message printed by calling function 
+    """
+    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
+    print("\033[1;35;10m "*22 + ">>>  No of Lines  <<<" + " "*23)
+    print("\033[1;34;40m>"*25 + " "*15 + "<"*26)
+
+
+def get_bet_info():
+    """
+    message printed by calling function 
+    """
+    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
+    print("\033[1;35;10m "*22 + ">>>  Bet per Line  <<<" + " "*22)
+    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
+
+
+def spin_info(player):
+    """
+    message printed by calling function 
+    """
+    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
+    print("\033[1;35;10m "*20 + f">>>  Turn {player.rounds} Results  \
+<<<" + " "*20)
+    print("\033[1;34;40m>"*25 + " "*16 + "<"*25)
+
+
+def highscores_info():
+    """
+    message printed by calling function 
+    """
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
+    print("\033[1;35;10m "*20 + ">>>  Top 10 High-Scores <<<" + " "*19)
+    print("\033[1;34;40m>"*27 + " "*11 + "<"*28)
 
 
 main()
