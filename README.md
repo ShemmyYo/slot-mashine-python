@@ -69,6 +69,7 @@ You can view the live, deployed application here: <a href ='https://shemmy-slot-
     - [PEP8 CI Validation](#pep8-ci-validation)
     - [Tests based on user stories](#tests-based-on-user-stories)
     - [Manual tests](#manual-tests)
+    - [Bugs](#bugs)
     - [Browser Compatibility](#browser-compatibility)
 - [Deployment](#deployment)
     - [Deploy to Heroku](#deploy-to-heroku)
@@ -124,13 +125,17 @@ The below flowchart has been created before my code to give me a clear view of w
 ### __Color Scheme__
 
 To provide a better user experience, I have decided to use a color scheme.
-The colours used were from ANSI gamma, as described below:
+
+
+At first I decided to use ANSI gamma, as described below:
 
 - Yellow color (\033[1;33;40m)
 - Red color (\033[1;31;40m)
 - Magenta color (\033[1;35;40m)
 - Green color (\033[1;32;40m)
 - Blue color (\033[1;34;40m)
+
+However, towards the end of the project I decided to import and use [Colorama](https://pypi.org/project/colorama/) to make certain parts stand out.
 
 ### __Class Object__
 OOC (Object Oriented Class) has been added in this project to create a Player class.
@@ -280,6 +285,7 @@ Regardless of whether the user gets to the top 10 or not, the high-scores table 
 - [time](https://docs.python.org/3/library/time.html) used time.sleep to enhance user experience and to pause
 - [gspread](https://docs.gspread.org/en/v5.7.0/) for linking Google Sheets to read and update the high-scores table.
 - [Google Auth](https://google-auth.readthedocs.io/en/master/) to access Google Sheets
+- [Colorama](https://pypi.org/project/colorama/) to add colour.
 
 ***
 
@@ -297,7 +303,10 @@ I used Google Sheets to store high-scores data.
 ### __PEP8 CI Validation__
 
 An online validation tool (provided by CI) was used to check that the code is up to standard.
-All were validated with no errors.
+
+Firstly, I have had a lot of: ``lines too long (81 > 79 characters)`` errors which I have rectified by moving long lines into the second line of code or by shoring code where possible.
+
+Finally, validated with no errors.
 
 [PEP8CI](https://pep8ci.herokuapp.com/) 
 
@@ -323,7 +332,7 @@ All were validated with no errors.
 
 ### __Manual tests:__
 
-<details><summary>Click to display manual tests</summary>
+<details><summary> >>> Click to display manual tests</summary>
 
 #### Welcome Screen
     - Welcome screen has loaded correctly and as intended.
@@ -398,6 +407,102 @@ All were validated with no errors.
     - Verified that when Enter is pressed, the user is redirected to Main Menu.
 
 </details>
+
+***
+
+### __Bugs__
+
+***
+
+#### __get_lines function__
+While testing get_lines function, I discovered that app is crashing after entering and testing incorect inputs.
+System has verified whether the input is correct and allowed only numbers between 1 and 3 however, in some instances, incorrect input has been remembered by the app and caused the below error:
+
+<details><summary> >>> Click to display Error Image</summary>
+
+![Lines Error Image](assets/images/error-lines-not-set-for-else.png)
+
+</details>
+
+I fixed the above error by resetting the `lines` variable back to '0' as per the code below:
+
+<details><summary> >>> Click to display Code</summary>
+
+```
+def get_number_of_lines():
+    """
+    Collects user imput as number of lines to bet,
+    checks if input is a valid number and prints msg.
+    """
+    get_number_of_lines_info()
+    while True:
+        lines = input(f"{Fore.YELLOW}\
+  Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")?  >>> ")
+        if lines.isdigit():
+            lines = int(lines)
+            if 1 <= lines <= MAX_LINES:
+                break
+            else:
+                print(f"{Fore.YELLOW}{Back.RED}\
+  !!!  NOTE: Enter a valid number of lines (between 1-{MAX_LINES})\n")
+        else:
+            print(f"{Fore.YELLOW}{Back.RED}\
+  !!!  NOTE: '{lines}', you entered is not accepted!\n")
+            print(f"{Fore.MAGENTA} Please enter a valid number of lines")
+            print(f"{Fore.MAGENTA}\
+ Number of lines must be a number between  1 and {MAX_LINES}\n")
+            lines = 0
+    print(f"{Fore.GREEN}  >>>  You bet on {lines} lines")
+    return lines
+```
+
+</details>
+
+***
+
+#### __Heroku load Error__
+
+After an overnight PC system update and restart, I have come across another error whereby Heroku displayed an error about creds.json not existing.
+
+<details><summary> >>> Click to display Error Image</summary>
+
+![Heroku Loading Error](assets/images/error-on-heroku-load.png)
+
+</details>
+
+Rectified this error by updating Heroku CREEDS config var which has disappeared after system reset.
+
+
+***
+
+#### __Infinite balance__
+
+In the first version, I had the option to change the deposit by the user to any value they wanted, which let them set an 'infinite' balance.
+
+Although this option worked well and the system has been verifying input correctly, I decided to remove this to prevent any possible future errors and limit it to 3 options only, making it a feature for users to be able to set difficulty level (hard €50, normal €100, easy €200).  
+
+<details><summary> >>> Click to display Image</summary>
+
+![Difficulty Level](assets/images/deposit.png)
+
+</details>
+
+***
+
+#### __Known Bugs__
+
+- Below unused argument and varables are correctly defined and actually used within functions
+    ```
+    Unused argument 'balance'
+    Unused variable 'winning_lines'
+    Unused variable 'count'
+    Unused variable 'item'
+    ```
+
+- Below warning msg refers to a scope which is indeed used within functions
+    ```
+    Redefining name 'symbol_count' from outer scope (line 36)
+    ```
 
 ***
 
@@ -483,6 +588,8 @@ GitHub Python Template [Code Institute](https://codeinstitute.net/)
 - os library used to clear screen  [Docs Python](https://docs.python.org/3/library/os.path.html)
 
 - datetime library used to pause 'time.sleep()' [Docs Python](https://docs.python.org/3/library/datetime.html)
+
+- Colorama tutorial [Colorama](https://www.youtube.com/watch?v=u51Zjlnui4Y/) 
 
 ### __Design__
 
