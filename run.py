@@ -41,10 +41,10 @@ symbol_count = {
 }
 
 symbol_value = {
-    "♡": 5,
-    "♢": 4,
-    "♤": 3,
-    "♧": 2
+    f"{Fore.RED}♡": 5,
+    f"{Fore.MAGENTA}♢": 4,
+    f"{Fore.CYAN}♤": 3,
+    f"{Fore.GREEN}♧": 2
 }
 
 
@@ -371,10 +371,7 @@ def main():
     clear_screen()
     welcome_screen()
     progress_bar()
-    player_active = False
-    if player_active is False:
-        player = player_details()
-        player_active = True
+    player = player_details()
     clear_screen()
     welcome_screen()
     progress_bar()
@@ -542,12 +539,13 @@ def game_over_info(player):
     game over printed what the end of the game or when user quits
     """
     print(f"{Fore.CYAN}{Style.BRIGHT}" + ">"*27 + " "*11 + "<"*28)
-    print(f"{Fore.YELLOW} "*12 + f">>> {player.name} you played \
+    print(f"{Fore.YELLOW} "*15 + f">>> {player.name} you played \
 {player.rounds} round(s)! <<<")
-    print(" "*15 + f"{Fore.GREEN}>>> You won {player.wins} time(s)! <<<")
-    print(" "*18 + f"{Fore.GREEN}>>> Total win of €{player.win}! <<<")
+    print(" "*18 + f"{Fore.GREEN}>>> You won {player.wins} time(s)! <<<")
+    print(" "*21 + f"{Fore.GREEN}>>> Total win of €{player.win}! <<<")
     print()
     update_highscores(player)
+    time.sleep(1)
     updated_highscores = highscores.get_all_values()
     highscores_info()
     col_len = {i: max(map(len, inner))
