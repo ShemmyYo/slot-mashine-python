@@ -106,10 +106,10 @@ __As a Player, I wish:__
 | 2   | to be able to see instructions before the start of the game.               |
 | 3   | to play a game that navigates easily.                                      |
 | 4   | to be able to set bet amount.                                              |
-| 5   | to be able to set difficulty level by setting deposit level                |
-| 6   | to be able to change the game difficulty by changing the number of lines I bet on. |
+| 5   | to be able to change the game difficulty by changing the number of lines I bet on                 |
+| 6   | to be able to set difficulty level by setting deposit level                |
 | 7   | to be given feedback if I entered invalid data.                            |
-| 8   | to be able to go reset the game.                                           |
+| 8   | to be able to reset the game.                                              |
 | 9   | to be able to see the current balance.                                     |
 | 10  | to be encouraged to replay and increase scores.                            |
 | 11  | to check if the user made the top 10 high scores.                          |
@@ -267,16 +267,16 @@ Regardless of whether the user gets to the top 10 or not, the high-scores table 
 - [Heroku](https://dashboard.heroku.com/apps) Used to deploy application.
 - [HTML5](https://html.spec.whatwg.org/) - provides content and structure 
 - [CSS](https://www.w3.org/Style/CSS/Overview.en.html) - provides styling 
-- [MindManager](https://app.mindmanager.com/) - for Flowcharts
-- [Aurora Gradient Animation](https://dev.to/albertwalicki/aurora-ui-how-to-create-with-css-4b6g) - created Aurora gradient background for website
-- [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/) - used extensively to experiment with grid, flexbox and general responsiveness
-- [VSCode](https://code.visualstudio.com/) - Used to create, edit and compile the code for the program
 - [Gitpod](https://www.gitpod.io/) - used to create and host the website
 - [Github](https://github.com/) - used to deploy the website 
 - [Git](https://git-scm.com/) - used for version control through the Gitpod terminal
-- [Technisini](https://techsini.com/multi-mockup/index.php) - to create an image displaying the home page on various devices 
-- [Grammarly](https://app.grammarly.com/) - to make writing clear and engaging as well as eliminate grammar errors
+- [VSCode](https://code.visualstudio.com/) - Used to create, edit and compile the code
 - [CI Python Linter](https://pep8ci.herokuapp.com/) - testing code with CI Python Linter
+- [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
+- [Technisini](https://techsini.com/multi-mockup/index.php) - mockup image of the home page on various devices 
+- [MindManager](https://app.mindmanager.com/) - for Flowcharts
+- [Aurora Gradient Animation](https://dev.to/albertwalicki/aurora-ui-how-to-create-with-css-4b6g) - created Aurora gradient background for website
+- [Grammarly](https://app.grammarly.com/) - to make writing clear and engaging as well as eliminate grammar errors
 
 ### __Imported Libraries and Packages__
 
@@ -285,7 +285,7 @@ Regardless of whether the user gets to the top 10 or not, the high-scores table 
 - [time](https://docs.python.org/3/library/time.html) used time.sleep to enhance user experience and to pause
 - [gspread](https://docs.gspread.org/en/v5.7.0/) for linking Google Sheets to read and update the high-scores table.
 - [Google Auth](https://google-auth.readthedocs.io/en/master/) to access Google Sheets
-- [Colorama](https://pypi.org/project/colorama/) to add colour.
+- [Colorama](https://pypi.org/project/colorama/) to add colour
 
 ***
 
@@ -320,8 +320,8 @@ Finally, validated with no errors.
 | 2   | to be able to see instructions before the start of the game. | Yes             |
 | 3   | to play a game that navigates easily.                        | Yes             |
 | 4   | to be able to set bet amount.                                | Yes             |
-| 5   | to be able to set difficulty level by setting deposit level  | Yes             |
-| 6   | to be able to change the game difficulty by changing the number of lines I bet on.  | Yes             |
+| 5   | to be able to change the game difficulty by changing the number of lines I bet on.   | Yes             |
+| 6   | to be able to set difficulty level by setting deposit level  | Yes             |
 | 7   | to be given feedback if I entered invalid data.              | Yes             |
 | 8   | to be able to go reset the game.                             | Yes             |
 | 9   | to be able to see the current balance.                       | Yes             |
@@ -343,19 +343,25 @@ Finally, validated with no errors.
 ![Player city validation](assets/images/error-player-city.png)
 
 #### Main Menu
-    - Main Menu has loaded correctly and as intended addressing the user with its Player name.
-    - Verified that when 1 is pressed, the game starts and displays the next function (Set Deposit).
+    - Main Menu has loaded correctly and as intended addressing the user 
+    with its Player name.
+    - Verified that when 1 is pressed, the game starts and displays the 
+    next function (Set Deposit).
     - Verified that when 2 is pressed, they are taken to the Instructions.
     - Verified that when 3 is pressed, they are taken to the High-Scores.
     - Verified that when Q is pressed, the program ends.
     - Input is verified and only 1, 2, 3 and Q are accepted.
     - That each number takes the user to the correct menu option.
 
+![Main Menu Validation](assets/images/error-main-menu.png)
+
 #### Play Game - deposit setting (option 1)
     - Deposit setting screen has loaded correctly and as intended.
     - Verified that the user is welcomed by its Player name. 
-    - Verified that the Player is invited to change the start deposit (difficulty level).
-    - Verified that when C is pressed, the Player is asked to choose a difficulty level (1 to 3).
+    - Verified that the Player is invited to change the start deposit 
+    (difficulty level).
+    - Verified that when C is pressed, the Player is asked to choose a 
+    difficulty level (1 to 3).
     - Verified that when 1 is pressed, the deposit is set to €50 (hard level).
     - Verified that when 2 is pressed, the deposit is set to €100 (normal level).
     - Verified that when 3 is pressed, the deposit is set to €200 (easy level).
@@ -364,9 +370,11 @@ Finally, validated with no errors.
 ![Deposit Validation](assets/images/error-deposit.png)
 
     - Verified that when Enter is pressed, the default deposit is accepted.
-    - Verified that once deposit/difficulty level is accepted, info is printed to the game screen 
+    - Verified that once deposit/difficulty level is accepted, info is 
+    printed to the game screen 
     - Verified that by pressing Enter when notified, the program 'spins reels'.
-    - Verified that pressing E when notified, exits the game, and prints out final totals.
+    - Verified that pressing E when notified, exits the game, and prints 
+    out final totals.
 
 #### Game Round - No of lines / Bet per line / Spin Reels
     - The game screen has loaded correctly and as intended.
@@ -374,25 +382,32 @@ Finally, validated with no errors.
 ![Number of lines validated](assets/images/error-lines.png)
     
     
-    - Verified that no other input than 1, 2, or 3 is accepted and the program provides info if incorrect input is entered.
-    - Verified that the Player can only bet between €1 to €100 and the bet can be covered by the deposit.
+    - Verified that no other input than 1, 2, or 3 is accepted and the program 
+    provides info if incorrect input is entered.
+    - Verified that the Player can only bet between €1 to €100 and the bet can 
+    be covered by the deposit.
 ![Balance check against total bet](assets/images/error-balance.png)
 
     
-    - Verified that no other input than €1 to €100 is accepted and the program provides info if incorrect input is entered.
+    - Verified that no other input than €1 to €100 is accepted and the program 
+    provides info if incorrect input is entered.
 ![Bet validated](assets/images/error-bet.png)
     
     
     - Verified that total bet per line info is displayed correctly to the Player.
-    - Verified that Reels loaded to the screen correctly and as intended showing symbols in lines.
+    - Verified that Reels loaded to the screen correctly and as intended showing 
+    symbols in lines.
     - Verified that wins/loses are shown correctly to the Player 
     - Verified that any wind/losses are added/subtracted to/from the balance.
-    - Verified that by pressing Enter when notified, the program 'spins reels' again or displays the final balance and information.
+    - Verified that by pressing Enter when notified, the program 'spins reels' 
+    again or displays the final balance and information.
 
 #### Game Over / High-Scores
     - Game Over screen has loaded correctly and as intended.
-    - Verified that number of played rounds, the number of rounds won and wins are calculated properly.
-    - Verified that total score is checked against the top 10 and if high enough, name and other details are correctly added to Hight-Score table.
+    - Verified that number of played rounds, the number of rounds won and wins 
+    are calculated properly.
+    - Verified that total score is checked against the top 10 and if high enough, 
+    name and other details are correctly added to Hight-Score table.
     - High-Scores have loaded correctly and as intended.
     - Verified that when Enter is pressed, the user is redirected to Main Menu.
     - Verified that when Q is pressed, the program ends.
@@ -415,8 +430,11 @@ Finally, validated with no errors.
 ***
 
 #### __get_lines function__
-While testing get_lines function, I discovered that app is crashing after entering and testing incorect inputs.
-System has verified whether the input is correct and allowed only numbers between 1 and 3 however, in some instances, incorrect input has been remembered by the app and caused the below error:
+While testing get_lines function, I discovered that app is crashing after entering 
+and testing incorect inputs.
+System has verified whether the input is correct and allowed only numbers 
+between 1 and 3 however, in some instances, incorrect input has been remembered 
+by the app and caused the below error:
 
 <details><summary> >>> Click to display Error Image</summary>
 
