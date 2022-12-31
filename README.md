@@ -331,104 +331,149 @@ Finally, validated with no errors.
 ***
 
 ### __Manual tests:__
+#### __Welcome Screen__
 
-<details><summary> >>> Click to display manual tests</summary>
 
-#### Welcome Screen
-    - Welcome screen has loaded correctly and as intended.
-    - Verified that the user can submit the Player name and city.
-    - Input is verified and only letters are accepted.
+<details><summary> >>> Click for details</summary>
+
+- Welcome screen has loaded correctly and as intended.
+- Verified that the user can submit the Player name and city.
+- Input is verified and only letters are accepted.
 
 ![Player name validation](assets/images/error-player-name.png)
 ![Player city validation](assets/images/error-player-city.png)
 
-#### Main Menu
-    - Main Menu has loaded correctly and as intended addressing the user 
-    with its Player name.
-    - Verified that when 1 is pressed, the game starts and displays the 
-    next function (Set Deposit).
-    - Verified that when 2 is pressed, they are taken to the Instructions.
-    - Verified that when 3 is pressed, they are taken to the High-Scores.
-    - Verified that when Q is pressed, the program ends.
-    - Input is verified and only 1, 2, 3 and Q are accepted.
-    - That each number takes the user to the correct menu option.
-
-![Main Menu Validation](assets/images/error-main-menu.png)
-
-#### Play Game - deposit setting (option 1)
-    - Deposit setting screen has loaded correctly and as intended.
-    - Verified that the user is welcomed by its Player name. 
-    - Verified that the Player is invited to change the start deposit 
-    (difficulty level).
-    - Verified that when C is pressed, the Player is asked to choose a 
-    difficulty level (1 to 3).
-    - Verified that when 1 is pressed, the deposit is set to €50 (hard level).
-    - Verified that when 2 is pressed, the deposit is set to €100 (normal level).
-    - Verified that when 3 is pressed, the deposit is set to €200 (easy level).
-    - Input is verified and only 1, 2 or 3 are accepted.
-
-![Deposit Validation](assets/images/error-deposit.png)
-
-    - Verified that when Enter is pressed, the default deposit is accepted.
-    - Verified that once deposit/difficulty level is accepted, info is 
-    printed to the game screen 
-    - Verified that by pressing Enter when notified, the program 'spins reels'.
-    - Verified that pressing E when notified, exits the game, and prints 
-    out final totals.
-
-#### Game Round - No of lines / Bet per line / Spin Reels
-    - The game screen has loaded correctly and as intended.
-    - Verified that the Player can only choose between lines 1 to 3
-![Number of lines validated](assets/images/error-lines.png)
-    
-    
-    - Verified that no other input than 1, 2, or 3 is accepted and the program 
-    provides info if incorrect input is entered.
-    - Verified that the Player can only bet between €1 to €100 and the bet can 
-    be covered by the deposit.
-![Balance check against total bet](assets/images/error-balance.png)
-
-    
-    - Verified that no other input than €1 to €100 is accepted and the program 
-    provides info if incorrect input is entered.
-![Bet validated](assets/images/error-bet.png)
-    
-    
-    - Verified that total bet per line info is displayed correctly to the Player.
-    - Verified that Reels loaded to the screen correctly and as intended showing 
-    symbols in lines.
-    - Verified that wins/loses are shown correctly to the Player 
-    - Verified that any wind/losses are added/subtracted to/from the balance.
-    - Verified that by pressing Enter when notified, the program 'spins reels' 
-    again or displays the final balance and information.
-
-#### Game Over / High-Scores
-    - Game Over screen has loaded correctly and as intended.
-    - Verified that number of played rounds, the number of rounds won and wins 
-    are calculated properly.
-    - Verified that total score is checked against the top 10 and if high enough, 
-    name and other details are correctly added to Hight-Score table.
-    - High-Scores have loaded correctly and as intended.
-    - Verified that when Enter is pressed, the user is redirected to Main Menu.
-    - Verified that when Q is pressed, the program ends.
-
-#### Instructions (option 2)
-    - Instructions have loaded correctly and as intended.
-    - Verified that when Enter is pressed, the user is redirected to Main Menu.
-    - Verified that when Q is pressed, the program ends.
-
-#### High-Scores (option3)
-    - High-Scores have loaded correctly and as intended.
-    - Verified that when Enter is pressed, the user is redirected to Main Menu.
 
 </details>
 
+---
+
+#### __Main Menu__
+
+
+<details><summary> >>> Click for details</summary>
+
+- Main Menu has loaded correctly and as intended addressing the user with its Player name.
+- Verified that when 1 is pressed, the game starts and displays the next function (Set Deposit).
+- Verified that when 2 is pressed, they are taken to the Instructions.
+- Verified that when 3 is pressed, they are taken to the High-Scores.
+- Verified that when Q is pressed, the program ends.
+- Input is verified and only 1, 2, 3 and Q are accepted.
+- That each number takes the user to the correct menu option.
+
+![Main Menu Validation](assets/images/error-main-menu.png)
+
+
+</details>
+
+---
+
+
+#### __Play Game - deposit setting (option 1)__
+
+
+<details><summary> >>> Click for details</summary>
+
+- Deposit setting screen has loaded correctly and as intended.
+- Verified that the user is welcomed by its Player name. 
+- Verified that the Player is invited to change the start deposit (difficulty level).
+- Verified that when C is pressed, the Player is asked to choose a difficulty level (1 to 3).
+- Verified that when 1 is pressed, the deposit is set to €50 (hard level).
+- Verified that when 2 is pressed, the deposit is set to €100 (normal level).
+- Verified that when 3 is pressed, the deposit is set to €200 (easy level).
+- Input is verified and only 1, 2 or 3 are accepted.
+
+![Deposit Validation](assets/images/error-deposit.png)
+
+- Verified that when Enter is pressed, the default deposit is accepted.
+- Verified that once deposit/difficulty level is accepted, info is printed to the game screen 
+- Verified that by pressing Enter when notified, the program 'spins reels'.
+- Verified that pressing E when notified, exits the game, and prints out final totals.
+
+
+</details>
+
+---
+
+#### __Game Round - No of lines / Bet per line / Spin Reels__
+
+
+<details><summary> >>> Click for details</summary>
+
+- The game screen has loaded correctly and as intended.
+- Verified that the Player can only choose between lines 1 to 3
+
+![Number of lines validated](assets/images/error-lines.png)
+    
+    
+- Verified that no other input than 1, 2, or 3 is accepted and the program provides info if incorrect input is entered.
+- Verified that the Player can only bet between €1 to €100 and the bet can be covered by the deposit.
+
+![Balance check against total bet](assets/images/error-balance.png)
+
+    
+- Verified that no other input than €1 to €100 is accepted and the program provides info if incorrect input is entered.
+
+![Bet validated](assets/images/error-bet.png)
+    
+    
+- Verified that total bet per line info is displayed correctly to the Player.
+- Verified that Reels loaded to the screen correctly and as intended showing symbols in lines.
+- Verified that wins/loses are shown correctly to the Player 
+- Verified that any wind/losses are added/subtracted to/from the balance.
+- Verified that by pressing Enter when notified, the program 'spins reels' again or displays the final balance and information.
+
+
+</details>
+
+---
+
+#### __Game Over / High-Scores__
+
+
+<details><summary> >>> Click for details</summary>
+
+- Game Over screen has loaded correctly and as intended.
+- Verified that number of played rounds, the number of rounds won and wins are calculated properly.
+- Verified that total score is checked against the top 10 and if high enough, name and other details are correctly added to Hight-Score table.
+- High-Scores have loaded correctly and as intended.
+- Verified that when Enter is pressed, the user is redirected to Main Menu.
+- Verified that when Q is pressed, the program ends.
+
+
+</details>
+
+---
+
+#### __Instructions (option 2)__
+
+
+<details><summary> >>> Click for details</summary>
+
+- Instructions have loaded correctly and as intended.
+- Verified that when Enter is pressed, the user is redirected to Main Menu.
+- Verified that when Q is pressed, the program ends.
+
+
+</details>
+
+---
+
+#### __High-Scores (option 3)__
+
+
+<details><summary> >>> Click for details</summary>
+
+- High-Scores have loaded correctly and as intended.
+- Verified that when Enter is pressed, the user is redirected to Main Menu.
+
+
+</details>
+
+
 ***
 
-### __Bugs__
-
-***
-
+### __Bugs:__
 #### __get_lines function__
 While testing get_lines function, I discovered that app is crashing after entering 
 and testing incorect inputs.
